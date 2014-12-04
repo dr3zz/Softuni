@@ -1,0 +1,36 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>TreeView Plugin</title>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+	<script type="text/javascript" src='scripts/treeview.js'></script>
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+	<h1>Tree View Plugin</h1>
+	<ul class='tree'>
+		<li>Item</li>
+		<li>Item</li>
+		<li>Have nested Item
+			<ul>
+				<li>Item</li>
+				<li>Have Nested Item
+					<ul>
+						<li>Sub Item</li>
+						<li>Sub Item</li>
+						<li>Sub Item</li>
+					</ul>
+				</li>
+			</ul> 
+		</li>
+		<li>Item</li>
+		<li>Item</li>	
+	</ul>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$('.tree').treeView();
+		});
+	</script>
+</body>
+</html>
