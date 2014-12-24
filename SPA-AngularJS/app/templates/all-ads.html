@@ -1,7 +1,39 @@
 <div class='jumbotron'>
 	<div class='row'>
 		<div class='col-md-8'>
-			asd
+			<div data-ng-repeat="ad in data.ads">
+				<div class='container well'>
+					<div class='row'>
+						<div class='col-md-7'>
+							<h3 class='pull-left'>
+								{{ad.title}}
+							</h3>
+						</div>
+						<div class='col-md-5'>
+							<span class='pull-right'>
+								{{ad.date | date:'dd-MMM-yyyy'}}
+							</span>
+						</div>
+						
+					</div>
+					<div class='row'>
+						<div class='col-md-4 image-container'>
+								<img src="" data-ng-src="{{ad.imageDataUrl}}">
+						</div>
+						<div class='col-md-8'>
+							<div>
+								{{ad.text}}
+							</div>
+							<div class='row'>
+								<div class='lg-md-2'>
+									
+								</div>
+								<div class='lg-md-10'></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
 		<div class='col-md-4'>
 			dsa
