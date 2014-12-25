@@ -1,7 +1,7 @@
 <div class='jumbotron'>
 	<div class='row'>
 		<div class='col-md-8'>
-			<div data-ng-repeat="ad in data.ads">
+			<div  dir-paginate="ad in data.ads | itemsPerPage: 5">
 				<div class='container well'>
 					<div class='row'>
 						<div class='col-md-7'>
@@ -18,26 +18,44 @@
 					</div>
 					<div class='row'>
 						<div class='col-md-4 image-container'>
-								<img src="" data-ng-src="{{ad.imageDataUrl}}">
+							<img src="" data-ng-src="{{ad.imageDataUrl}}">
 						</div>
 						<div class='col-md-8'>
-							<div>
+							<div class='well'>
 								{{ad.text}}
 							</div>
 							<div class='row'>
-								<div class='lg-md-2'>
-									
+								<div class='col-md-2 '>
+									Name 
 								</div>
-								<div class='lg-md-10'></div>
+								<div class='col-md-10 '>
+									<div class='form-control'>{{ad.ownerName}}</div></div>
+									<div class='col-md-2'>
+										Email: 
+									</div>
+									<div class='col-md-10'>
+										<div class='form-control'>{{ad.ownerPhone}}</div></div>
+										<div class='col-md-2'>
+											Tel. 
+										</div>
+										<div class='col-md-10 '>
+											<div class='form-control'>{{ad.ownerEmail}}</div></div>
+										</div>
+										<div class='row'>
+											<div class='col-md-2'>
+
+											</div>
+											<div class='col-md-10'></div>
+										</div>
+									</div>
+								</div>
 							</div>
 						</div>
 					</div>
+					<div class='col-md-4'>
+						<div class></div>
+					</div>
 				</div>
+				<dir-pagination-controls template-url="templates/pagination/dirPagination.tpl.html"></dir-pagination-controls>
 			</div>
 		</div>
-		<div class='col-md-4'>
-			dsa
-		</div>
-	</div>
-	
-</div>

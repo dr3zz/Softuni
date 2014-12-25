@@ -7,7 +7,7 @@ softUniApp.factory('mainData', function ($http) {
 			success(data);
 		})
 		.error(function (data,status,headers,config) {
-			$log.warn(data);
+			console.log(data);
 		});
 	}
 	return {
