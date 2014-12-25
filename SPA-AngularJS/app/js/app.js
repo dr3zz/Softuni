@@ -1,6 +1,6 @@
 var softUniApp = angular.module('softUniApp', ['ngResource', 'ngRoute', 'angularUtils.directives.dirPagination'])
-	.config(function($routeProvider, paginationTemplateProvider) {
-		paginationTemplateProvider.setPath('templates/pagination/dirPagination.tpl.html');
+	.config(function($routeProvider) {
+
 		$routeProvider.when('/register', {
 			templateUrl: 'templates/register.html'
 
