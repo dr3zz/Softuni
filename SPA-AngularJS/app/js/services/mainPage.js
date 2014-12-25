@@ -10,7 +10,29 @@ softUniApp.factory('mainData', function ($http) {
 			console.log(data);
 		});
 	}
+	function getAllTowns (success) {
+		var getUrl = url + 'towns/';
+		$http({method:'GET',url: getUrl}).
+		success(function (data,status,headers,config) {
+			success(data);
+		})
+		.error(function (data,status,headers,config) {
+			console.log(data);
+		});
+	}
+	function getAllCategories (success) {
+		var getUrl = url + 'categories/';
+		$http({method:'GET',url: getUrl})
+		.success(function (data,status,headers,config) {
+			success(data);
+		})
+		.error(function (data,status,headers,config) {
+			console.log(data);
+		});
+	}
 	return {
-		getAllAds: getAllAds
+		getAllAds: getAllAds,
+		getAllTowns : getAllTowns,
+		getAllCategories: getAllCategories
 	};
 });
