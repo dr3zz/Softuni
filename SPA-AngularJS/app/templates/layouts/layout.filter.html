@@ -1,0 +1,30 @@
+<div class="bs-component">
+	<div class="panel panel-success">
+		<div class="panel-heading">
+			<h3 class="panel-title">Panel primary</h3>
+		</div>
+		<div class="panel-body" >
+			<div data-ng-class="{'link-active': town.id == activeTown}" ><a href="" data-ng-click="filterTowns.townId = '';selectedTown(town.id)">All Towns</a></div>
+		</div>
+		<div class="panel-body" data-ng-repeat="town in towns">
+			<div data-ng-class="{'link-active': town.id == activeTown}" >
+				<a data-ng-click="filterTowns.townId = town.id;selectedTown(town.id)">{{town.name}} {{town.id}} </a></div>
+			</div>
+		</div>
+		<div class="panel panel-success">
+			<div class="panel-heading">
+				<h3 class="panel-title">Panel success</h3>
+			</div>
+			<div class="panel-body">
+				<div class="panel-body" >
+					<div data-ng-class="{'link-active': category.id == activeCategory}">
+						<a href="" data-ng-click="filterCategories.categoryId = '';selectedCategory(category.id)">All Categories</a></div>
+					</div>
+					<div class="panel-body" data-ng-repeat="category in categories">
+						<div data-ng-class="{'link-active': category.id == activeCategory}">
+							<a href=""data-ng-click="filterCategories.categoryId = category.id;selectedCategory(category.id)" >{{category.name}} {{category.id}}</a></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>

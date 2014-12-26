@@ -12,9 +12,10 @@ var softUniApp = angular.module('softUniApp', ['ngResource', 'ngRoute', 'angular
 		$routeProvider.when('/ads', {
 			templateUrl: 'templates/all-ads.html',
 
+
 		});
 		$routeProvider.otherwise({
 			redirectTo: '/ads'
 		});
-
+		
 	});
