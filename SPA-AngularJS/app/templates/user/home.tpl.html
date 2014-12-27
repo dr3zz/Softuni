@@ -1,14 +1,8 @@
 <div class='jumbotron'>
 	<div class='row'>
-		<div class='col-md-3'data-ng-controller="UserController">
-			<div data-ng-if="userData.isLoggedUser()" data-ng-include="'templates/layouts/layout.userMenu.html'">
-		</div>
-		<div data-ng-if="!userData.isLoggedUser()" data-ng-include="'templates/layouts/layout.register-login.html'">
-		</div>
-		</div>
-		<div class='col-md-6'>
+		<div class='col-md-8'>
 			<div  dir-paginate="ad in dataArray | itemsPerPage: 10|filter:filterTowns|filter:filterCategories ">
-
+			
 				<div class='container well'>
 					<div class='row'>
 						<div class='col-md-7'>
@@ -68,16 +62,15 @@
 											</div>
 										</div>
 									</div>
-
 								</div>
 
-								<div class='center-block'>
-									<dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)" template-url="templates/pagination/dirPagination.tpl.html"></dir-pagination-controls>
-								</div>
+						
 							</div>
-							<div class='col-md-3'>
+							<div class='col-md-4'>
 								<div data-ng-include="'templates/layouts/layout.filter.html'">
 								</div>
 							</div>
 						</div>
-						
+						<div class='center-block'>
+							<dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)" template-url="templates/pagination/dirPagination.tpl.html"></dir-pagination-controls>
+						</div>

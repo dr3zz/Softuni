@@ -5,3 +5,11 @@
 .link-active {
   background-color: green;
 }
+.centered {
+	float: none !important;
+	text-align: center !important;
+}
+.rigth {
+	float: none !important;
+	text-align: right;
+}

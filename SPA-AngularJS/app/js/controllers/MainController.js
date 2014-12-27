@@ -1,17 +1,14 @@
 softUniApp.controller('MainController', function($scope, mainData) {
 
 	mainData.getNumPages(function(numPages) {
-		var resultData = {
-
-		};
 		$scope.dataArray = [];
-		var numPage = 1;
-		for (var i = 0; i < numPages; i++) {
-			mainData.getAllAds(numPage, function(resp) {
-				$scope.dataArray.push(resp)
+		for (var i = 1; i <= numPages; i++) {
+			mainData.getAllAds(i, function(resp) {
+				for (var j = 0; j < resp.ads.length; j++) {
+					$scope.dataArray.push(resp.ads[j]);
+				};
 
 			});
-			numPage += 1;
 		}
 	});
 
