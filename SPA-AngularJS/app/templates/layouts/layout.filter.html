@@ -5,10 +5,10 @@
 		</div>
 		<div class="panel-body" >
 			<p class="bs-component">
-				<a href="" data-ng-click="filterTowns.townId = '';selectedTown(town.id)" class="btn btn-primary" data-ng-class="{'active': town.id == activeTown}" >All towns</a>
+				<a href="" data-ng-click="selectedTown()" class="btn btn-primary" data-ng-class="{'active': town.id == activeTown}" >All towns</a>
 			</p>	
 			<p class="bs-component" data-ng-repeat="town in towns">
-				<a href="" data-ng-click="filterTowns.townId = town.id;selectedTown(town.id)" class="btn btn-primary" data-ng-class="{'active': town.id == activeTown}" >{{town.name}} {{town.id}}</a>
+				<a href="" data-ng-click="selectedTown(town.id)" class="btn btn-primary" data-ng-class="{'active': town.id == activeTown}" >{{town.name}} {{town.id}}</a>
 			</p>
 		</div>
 	</div>
@@ -17,29 +17,13 @@
 			<h3 class="panel-title">Panel primary</h3>
 		</div>
 		<div class="panel-body" >
-			<p class="bs-component">
-				<a href="" data-ng-click="filterCategories.categoryId = '';selectedCategory(category.id)" class="btn btn-primary" data-ng-class="{'active': category.id == activeCategory}" >All Categories</a>
+			<p class="bs-component" >
+				<a href="" data-ng-click="selectedCategory()" class="btn btn-primary" data-ng-class="{'active': category.id == activeCategory}" >All Categories</a>
 			</p>	
 			<p class="bs-component" data-ng-repeat="category in categories">
-				<a href="" data-ng-click="filterCategories.categoryId = category.id;selectedCategory(category.id)" class="btn btn-primary" data-ng-class="{'active': category.id == activeCategory}" >{{category.name}} {{category.id}}</a>
+				<a href="" data-ng-click="selectedCategory(category.id)" class="btn btn-primary" data-ng-class="{active: category.id == activeCategory}" >{{category.name}} {{category.id}}</a>
 			</p>
 		</div>
 	</div>
 </div>
-		<!-- <div class="panel panel-success">
-			<div class="panel-heading">
-				<h3 class="panel-title">Panel success</h3>
-			</div>
-			<div class="panel-body">
-				<div class="panel-body" >
-					<div data-ng-class="{'link-active': category.id == activeCategory}">
-						<a href="" data-ng-click="filterCategories.categoryId = '';selectedCategory(category.id)">All Categories</a></div>
-					</div>
-					<div class="panel-body" data-ng-repeat="category in categories">
-						<div data-ng-class="{'link-active': category.id == activeCategory}">
-							<a href=""data-ng-click="filterCategories.categoryId = category.id;selectedCategory(category.id)" >{{category.name}} {{category.id}}</a></div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div> -->
+	
