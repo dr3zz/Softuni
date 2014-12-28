@@ -1,19 +1,22 @@
-softUniApp.controller('UserController', function($scope, $window, userData) {
+softUniApp.controller('UserController', function($scope, $window, Auth) {
     $scope.register = registerUser;
     $scope.login = loginUser;
-    $scope.userData = userData;
+    $scope.userData = Auth;
     $scope.logout = logout;
-
+    $scope.registerPrint = registerPrint;
+    function registerPrint(obj) {
+        console.log(obj);
+    }
     function registerUser() {
         var user = {
             username: $scope.username,
             password: $scope.password
         };
-        userData.register(user)
+        Auth.register($scope.registerObj)
             .then(
                 function() {
                     alert('user successfully registered');
-                    $window.location.href = '#/login';
+                    $window.location.href = '#/user/home';
                 },
                 function(err) {
                     console.log(err);
@@ -28,13 +31,13 @@ softUniApp.controller('UserController', function($scope, $window, userData) {
             password: $scope.password
         };
 
-        userData.login(user)
+        Auth.login(user)
             .then(
                 function(userLoginData) {
                     console.dir(userLoginData);
-                    userData.setLoggedUser(userLoginData);
+                    Auth.setLoggedUser(userLoginData);
                     $scope.removeFilters();
-                    $window.location.href = '#/ads';
+                    $window.location.href = '#/user/home';
 
                 },
                 function(err) {
@@ -44,6 +47,6 @@ softUniApp.controller('UserController', function($scope, $window, userData) {
     }
 
     function logout() {
-        userData.logout();
+        Auth.logout();
     }
 });

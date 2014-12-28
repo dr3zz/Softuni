@@ -16,13 +16,26 @@ var softUniApp = angular.module('softUniApp', ['ngResource', 'ngRoute'])
 			templateUrl: 'templates/all-ads.html',
 
 		});
+
 		$routeProvider.otherwise({
+			title: '',
 			redirectTo: '/'
 		});
 
-	}).run(function($location, $rootScope) {
+	}).run(function($location, $rootScope, Auth) {
+		$rootScope.page = {
+			setTitle: function(title) {
+				this.title = title;
+			}
+		}
 		$rootScope.$on('$routeChangeSuccess', function(event, current, previous) {
-			$rootScope.pageTitle = current.$$route.title;
+			$rootScope.page.setTitle(current.$$route.title || 'Default Title');
+			console.log($rootScope.page.title);
+			// console.log(current.$$route.title);
+			// $rootScope.pageTitle = current.$$route.title;
+			// if (!Auth.isLoggedUser()) {
+			// 	$location.path('/');
+			// }
 		});
 	})
 	.constant('baseUrl', 'http://localhost:1337/api/')

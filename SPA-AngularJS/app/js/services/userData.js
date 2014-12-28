@@ -1,6 +1,6 @@
 "use strict";
 
-softUniApp.factory('userData', function($http, $q) {
+softUniApp.factory('Auth', function($http, $q) {
     var baseUrl = 'http://localhost:1337/api/user/';
     return {
        
@@ -39,7 +39,6 @@ softUniApp.factory('userData', function($http, $q) {
             $http({
                     method: 'POST',
                     url: baseUrl + 'login/',
-                   
                     data : user
                 })
                 .success(function(userLoginData) {
