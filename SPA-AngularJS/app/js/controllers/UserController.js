@@ -4,23 +4,23 @@ softUniApp.controller('UserController', function($scope, $window, Auth) {
     $scope.userData = Auth;
     $scope.logout = logout;
     $scope.registerPrint = registerPrint;
+    $scope.emailPattern = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    $scope.phonePattern = /\(?[+]([0-9]{3})\)?([ -]?)([0-9]{3})\2([0-9]{6})|([0-9]{2,3})[ ]([0-9]{6,7})/g;
     function registerPrint(obj) {
         console.log(obj);
     }
     function registerUser() {
-        var user = {
-            username: $scope.username,
-            password: $scope.password
-        };
         Auth.register($scope.registerObj)
             .then(
-                function() {
-                    alert('user successfully registered');
+                function(userRegisterData) {
+                    console.dir(userRegisterData);
+                    Auth.setLoggedUser(userRegisterData);
+                    $scope.removeFilters();
                     $window.location.href = '#/user/home';
                 },
                 function(err) {
                     console.log(err);
-                    $window.location.href = '#/login';
+                    $window.location.href = '#/register';
                 }
             );
     }
