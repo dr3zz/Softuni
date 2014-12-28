@@ -1,4 +1,4 @@
-var softUniApp = angular.module('softUniApp', ['ngResource', 'ngRoute', 'angularUtils.directives.dirPagination'])
+var softUniApp = angular.module('softUniApp', ['ngResource', 'ngRoute'])
 	.config(function($routeProvider) {
 
 		$routeProvider.when('/register', {
@@ -12,16 +12,18 @@ var softUniApp = angular.module('softUniApp', ['ngResource', 'ngRoute', 'angular
 
 		});
 		$routeProvider.when('/', {
-			title : 'Ads - Home',
+			title: 'Ads - Home',
 			templateUrl: 'templates/all-ads.html',
-		
+
 		});
 		$routeProvider.otherwise({
 			redirectTo: '/'
 		});
-		
-	}).run(function ($location, $rootScope) {
-		$rootScope.$on('$routeChangeSuccess', function (event, current, previous) {
-        $rootScope.pageTitle = current.$$route.title;
-    });
-	});
+
+	}).run(function($location, $rootScope) {
+		$rootScope.$on('$routeChangeSuccess', function(event, current, previous) {
+			$rootScope.pageTitle = current.$$route.title;
+		});
+	})
+	.constant('baseUrl', 'http://localhost:1337/api/')
+	.constant('pageSize', 4);;

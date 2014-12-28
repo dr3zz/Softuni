@@ -1,28 +1,14 @@
-softUniApp.factory('mainData', function($http, $q) {
+softUniApp.factory('mainData', function($http, $q, baseUrl) {
 	var url = 'http://localhost:1337/api/';
 
-	function getNumPages() {
-		var d = $q.defer();
-		var getUrl = url + 'ads';
-		$http({
-			method: 'GET',
-			url: getUrl
-		}).
-		success(function(data, status, headers, config) {
-				d.resolve(data.numPages);
-			})
-			.error(function(data, status, headers, config) {
-				d.reject(data);
-			});
-		return d.promise;
-	}
 
-	function getAllAds(numPage,filterUrl) {
+	function getAllAds(params) {
 		var d = $q.defer();
-		var getUrl = url + 'ads?startpage=' + numPage + filterUrl;
+
 		$http({
 				method: 'GET',
-				url: getUrl
+				url: baseUrl + 'ads/',
+				params: params
 			})
 			.success(function(data, status, headers, config) {
 				d.resolve(data);
@@ -35,7 +21,7 @@ softUniApp.factory('mainData', function($http, $q) {
 	}
 
 	function getAllTowns() {
-		var getUrl = url + 'towns/';
+		var getUrl = baseUrl + 'towns/';
 		var d = $q.defer();
 		$http({
 			method: 'GET',
@@ -52,7 +38,7 @@ softUniApp.factory('mainData', function($http, $q) {
 
 	function getAllCategories() {
 		var d = $q.defer();
-		var getUrl = url + 'categories/';
+		var getUrl = baseUrl + 'categories/';
 		$http({
 				method: 'GET',
 				url: getUrl
@@ -69,6 +55,6 @@ softUniApp.factory('mainData', function($http, $q) {
 		getAllAds: getAllAds,
 		getAllTowns: getAllTowns,
 		getAllCategories: getAllCategories,
-		getNumPages: getNumPages
+
 	};
 });

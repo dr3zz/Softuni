@@ -1,4 +1,4 @@
-softUniApp.controller('UserController', function ($scope, $window, userData) {
+softUniApp.controller('UserController', function($scope, $window, userData) {
     $scope.register = registerUser;
     $scope.login = loginUser;
     $scope.userData = userData;
@@ -11,15 +11,15 @@ softUniApp.controller('UserController', function ($scope, $window, userData) {
         };
         userData.register(user)
             .then(
-            function () {
-                alert('user successfully registered');
-                $window.location.href = '#/login';
-            },
-            function (err) {
-                console.log(err);
-                $window.location.href = '#/login';
-            }
-        );
+                function() {
+                    alert('user successfully registered');
+                    $window.location.href = '#/login';
+                },
+                function(err) {
+                    console.log(err);
+                    $window.location.href = '#/login';
+                }
+            );
     }
 
     function loginUser() {
@@ -30,15 +30,17 @@ softUniApp.controller('UserController', function ($scope, $window, userData) {
 
         userData.login(user)
             .then(
-            function (userLoginData) {
-                console.dir(userLoginData);
-                userData.setLoggedUser(userLoginData);
-                $window.location.href = '#/ads';
-            },
-            function (err) {
-                console.log(err);
-            }
-        )
+                function(userLoginData) {
+                    console.dir(userLoginData);
+                    userData.setLoggedUser(userLoginData);
+                    $scope.removeFilters();
+                    $window.location.href = '#/ads';
+
+                },
+                function(err) {
+                    console.log(err);
+                }
+            )
     }
 
     function logout() {

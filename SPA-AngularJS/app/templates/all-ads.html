@@ -7,7 +7,7 @@
 		</div>
 		</div>
 		<div class='col-md-6'>
-			<div  dir-paginate="ad in dataArray | itemsPerPage: 3">
+			<div  ng-repeat="ad in dataAds">
 				<!-- <div  dir-paginate="ad in dataArray | itemsPerPage: 3|filter:{townId: town_id}|filter:filterCategories "> -->
 
 				<div class='container well'>
@@ -27,6 +27,7 @@
 					<div class='row'>
 						<div class='col-md-4 image-container'>
 							<img src="" data-ng-src="{{ad.imageDataUrl}}">
+							<img src="" alt="" data-ng-if="!ad.imageDataUrl" data-ng-src="imgs/no-image.jpg"/>
 						</div>
 						<div class='col-md-8'>
 							<div class='well'>
@@ -73,7 +74,7 @@
 								</div>
 
 								<div class='center-block'>
-									<dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)" template-url="templates/pagination/dirPagination.tpl.html"></dir-pagination-controls>
+									 <div ng-if='numPages > 1' pagination></div>
 								</div>
 							</div>
 							<div class='col-md-3'>

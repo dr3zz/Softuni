@@ -18,7 +18,7 @@
 		</div>
 		<div class="panel-body" >
 			<p class="bs-component" >
-				<a href="" data-ng-click="selectedCategory()" class="btn btn-primary" data-ng-class="{'active': category.id == activeCategory}" >All Categories</a>
+				<a href="" data-ng-click="selectedCategory()" class="btn btn-primary" data-ng-class="{active: category.id == activeCategory}" >All Categories</a>
 			</p>	
 			<p class="bs-component" data-ng-repeat="category in categories">
 				<a href="" data-ng-click="selectedCategory(category.id)" class="btn btn-primary" data-ng-class="{active: category.id == activeCategory}" >{{category.name}} {{category.id}}</a>

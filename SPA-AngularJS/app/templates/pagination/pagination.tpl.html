@@ -1,4 +1,4 @@
-<ul class="pagination" ng-if="1 < pages.length">
+<!-- <ul class="pagination" ng-if="1 < pages.length">
     <li ng-if="boundaryLinks" ng-class="{ disabled : pagination.current == 1 }">
         <a href="" ng-click="setCurrent(1)">First</a>
     </li>
@@ -15,15 +15,15 @@
     <li ng-if="boundaryLinks"  ng-class="{ disabled : pagination.current == pagination.last }">
         <a href="" ng-click="setCurrent(pagination.last)">Last</a>
     </li>
-</ul>
-<!-- <ul class="pagination">
-    <li><a href="" data-ng-click="firstPage()">««</a></li>
-    <li><a href="" data-ng-click="prevPage()">«</a></li>
+</ul> -->
+<ul class="pagination">
+    <li  data-ng-class="{disabled: 1 == activePage}"><a href="" data-ng-click="firstPage()">First</a></li>
+    <li data-ng-class="{disabled: 1 == activePage}"><a href="" data-ng-click="prevPage()">Previous</a></li>
 
-    <li data-ng-repeat="i in pagesArr track by $index" data-id="{{$index + 1}}">
-        <a href="" data-ng-click="setStartPage($index+1)">{{$index + 1}}</a>
+    <li data-ng-repeat="i in pagesArr track by $index" data-id="{{$index + 1}}" data-ng-class="{active: $index+1 == activePage  }">
+        <a href=""  data-ng-click="setStartPage($index+1)">{{$index + 1}}</a>
     </li>
 
-    <li><a href="" data-ng-click="nextPage()">»</a></li>
-    <li><a href="" data-ng-click="lastPage(pagesArr.length)">»»</a></li>
-</ul> -->
+    <li data-ng-class="{disabled: pagesArr.length == activePage}"><a href="" data-ng-click="nextPage()">Next</a></li>
+    <li  data-ng-class="{disabled: pagesArr.length == activePage}"><a href="" data-ng-click="lastPage(pagesArr.length)">Last</a></li>
+</ul>

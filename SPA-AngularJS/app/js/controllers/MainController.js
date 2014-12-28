@@ -1,54 +1,80 @@
-softUniApp.controller('MainController', function($scope, $filter, $rootScope, mainData) {
-
-	loadPage();
-	function loadPage() {
-		mainData.getNumPages().then(function(data) {
-			$scope.dataArray = [];
-			var filterUrl = getFilteredData();
-
-			for (var i = 1; i <= data; i++) {
-				mainData.getAllAds(i, filterUrl).then(function(data) {
-					for (var j = 0; j < data.ads.length; j++) {
-						$scope.dataArray.push(data.ads[j]);
-					}
-
-				}, function(err) {
-					console.log(err);
-				});
-			}
-
-		}, function(err) {
-			console.log(err);
-		});
-	};
-
+softUniApp.controller('MainController', function($scope, $filter, $rootScope, mainData, pageSize) {
 	$scope.activeCategory = null;
 	$scope.activeTown = null;
+	$scope.activePage = 1;
+	$scope.getAds = function(requestParams) {
+		getFilteredData();
+		mainData.getAllAds(requestParams).then(function(data) {
+
+				$scope.dataAds = data.ads;
+				$scope.pagesArr = new Array(data.numPages);
+				$scope.numPages = data.numPages;
+			},
+			function(err) {
+				console.log(err);
+			});
+	};
+	var getTowns = function() {
+		mainData.getAllTowns()
+			.then(function(resp) {
+				$scope.towns = resp;
+			}, function(err) {
+				console.log(err);
+			});
+	};
+	var getCategories = function() {
+		mainData.getAllCategories()
+			.then(function(resp) {
+				$scope.categories = resp;
+			}, function(err) {
+				console.log(err);
+			});
+	};
+	$scope.adsRequestParams = {
+		startPage: 1,
+		pageSize: pageSize
+	};
+
+
+	$scope.adsRequestParams = {
+		startPage: 1,
+		pageSize: 4
+	};
+
 
 	function getFilteredData() {
-		var resultParameters = '';
 
 		if ($scope.activeTown !== null) {
-			resultParameters += '&townid=' + $scope.activeTown;
 
+			$scope.adsRequestParams['townid'] = $scope.activeTown;
+			$scope.adsRequestParams.startPage = 1;
+		} else {
+			if ($scope.adsRequestParams['townid']) {
+				delete $scope.adsRequestParams['townid'];
+			}
 		}
 		if ($scope.activeCategory !== null) {
-			resultParameters += '&categoryid=' + $scope.activeCategory;
+			$scope.adsRequestParams['categoryid'] = $scope.activeCategory;
+			$scope.adsRequestParams.startPage = 1;
+
+		} else {
+			if ($scope.adsRequestParams['categoryid']) {
+				delete $scope.adsRequestParams['categoryid'];
+			}
 		}
-		return resultParameters;
 	}
-	mainData.getAllTowns()
-		.then(function(resp) {
-			$scope.towns = resp;
-		}, function(err) {
-			console.log(err);
-		});
-	mainData.getAllCategories()
-		.then(function(resp) {
-			$scope.categories = resp;
-		}, function(err) {
-			console.log(err);
-		});
+	$scope.removeFilters = function() {
+		if ($scope.activeTown) {
+			$scope.activeTown = null;
+		}
+		if ($scope.activeCategory) {
+			$scope.activeCategory = null;
+		}
+		getFilteredData();
+		$scope.getAds($scope.adsRequestParams);
+
+	};
+
 
 	$scope.selectedTown = function(id) {
 		if (!id) {
@@ -56,7 +82,7 @@ softUniApp.controller('MainController', function($scope, $filter, $rootScope, ma
 		} else {
 			$scope.activeTown = id;
 		}
-		loadPage();
+		$scope.getAds($scope.adsRequestParams);
 	};
 	$scope.selectedCategory = function(id) {
 		if (!id) {
@@ -64,10 +90,10 @@ softUniApp.controller('MainController', function($scope, $filter, $rootScope, ma
 		} else {
 			$scope.activeCategory = id;
 		}
-		loadPage();
-	}
+		$scope.getAds($scope.adsRequestParams);
+	};
+	$scope.getAds($scope.adsRequestParams);
+	getTowns();
+	getCategories();
 
-
-	// $scope.filterTowns = {};
-	// $scope.filterCategories = {};
 });
