@@ -17,9 +17,9 @@ softUniApp.factory('mainData', function($http, $q) {
 		return d.promise;
 	}
 
-	function getAllAds(numPage) {
+	function getAllAds(numPage,filterUrl) {
 		var d = $q.defer();
-		var getUrl = url + 'ads?startpage=' + numPage;
+		var getUrl = url + 'ads?startpage=' + numPage + filterUrl;
 		$http({
 				method: 'GET',
 				url: getUrl

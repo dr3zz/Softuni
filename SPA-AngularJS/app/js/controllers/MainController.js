@@ -1,22 +1,42 @@
-softUniApp.controller('MainController', function($scope, $filter, mainData) {
+softUniApp.controller('MainController', function($scope, $filter, $rootScope, mainData) {
 
+	loadPage();
+	function loadPage() {
+		mainData.getNumPages().then(function(data) {
+			$scope.dataArray = [];
+			var filterUrl = getFilteredData();
 
-	mainData.getNumPages().then(function(data) {
-		$scope.dataArray = [];
-		for (var i = 1; i <= data; i++) {
-			mainData.getAllAds(i, data).then(function(data) {
-				for (var j = 0; j < data.ads.length; j++) {
-					$scope.dataArray.push(data.ads[j]);
-				}
-			}, function(err) {
-				console.log(err);
-			});
+			for (var i = 1; i <= data; i++) {
+				mainData.getAllAds(i, filterUrl).then(function(data) {
+					for (var j = 0; j < data.ads.length; j++) {
+						$scope.dataArray.push(data.ads[j]);
+					}
+
+				}, function(err) {
+					console.log(err);
+				});
+			}
+
+		}, function(err) {
+			console.log(err);
+		});
+	};
+
+	$scope.activeCategory = null;
+	$scope.activeTown = null;
+
+	function getFilteredData() {
+		var resultParameters = '';
+
+		if ($scope.activeTown !== null) {
+			resultParameters += '&townid=' + $scope.activeTown;
+
 		}
-
-	}, function(err) {
-		console.log(err);
-	});
-
+		if ($scope.activeCategory !== null) {
+			resultParameters += '&categoryid=' + $scope.activeCategory;
+		}
+		return resultParameters;
+	}
 	mainData.getAllTowns()
 		.then(function(resp) {
 			$scope.towns = resp;
@@ -31,20 +51,23 @@ softUniApp.controller('MainController', function($scope, $filter, mainData) {
 		});
 
 	$scope.selectedTown = function(id) {
-		$scope.town_id = id;
-		$scope.activeTown = id;
-		console.log($scope.town_id);
-		//TODO get town By id from server
-		return $filter('filter')($scope.dataArray, {
-			townId: id
-		});
+		if (!id) {
+			$scope.activeTown = null;
+		} else {
+			$scope.activeTown = id;
+		}
+		loadPage();
 	};
-	$scope.selectedCategory = function (id) {
-		$scope.activeCategory = id;
-		//TODO get town By id from server
+	$scope.selectedCategory = function(id) {
+		if (!id) {
+			$scope.activeCategory = null;
+		} else {
+			$scope.activeCategory = id;
+		}
+		loadPage();
 	}
-	
+
 
 	// $scope.filterTowns = {};
-	$scope.filterCategories = {};
+	// $scope.filterCategories = {};
 });
