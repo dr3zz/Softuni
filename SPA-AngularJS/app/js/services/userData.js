@@ -1,92 +1,66 @@
-"use strict";
+softUniApp.factory('userData', function($http, $q, baseUrl, Auth) {
+	var userBaseUrl = baseUrl + "user/";
 
-softUniApp.factory('Auth', function($http, $q, $window) {
-    var baseUrl = 'http://localhost:1337/api/user/';
-    var headers = {};
+	function getHeaders() {
+		$http.defaults.headers.common['Authorization'] = Auth.getAuthorizationHeaders().Authorization;
+	}
 
-    function setAuthorizationHeaders(accessToken) {
-        angular.extend(headers, {
-            Authorization: 'Bearer + ' + accessToken
-        });
-    }
+	function publishUserAdAgain (id) {
+		var d = $q.defer();
+		var url = userBaseUrl + 'ads/publishagain/' + id;
+		$http({
+			method: 'PUT',
+			url: url
+		})
+		.success(function (data,status,headers,config) {
+			d.resolve(data);
+		})
+		.error(function (data,status,headers,config) {
+			d.reject(data);
+		});
+		return d.promise;
+	}
+	function deactivateUserAd(id) {
+		var d = $q.defer();
+		var url = userBaseUrl + "ads/deactivate/" + id;
+		$http({
+				method: 'PUT',
+				url: url
+			})
+			.success(function(data, status, headers, config) {
+				d.resolve(data);
+			})
+			.error(function(data, status, headers, config) {
+				d.reject(data);
+			});
+		return d.promise;
+	}
 
-    function getLocalUser() {
-        var savedUser = JSON.parse($window.sessionStorage.getItem('UserData'));
-        if (savedUser) {
-         
-            return savedUser;
-        } else {
-            return false;
-        }
-    }
-    return {
+	function getAllUserAds(params) {
+		var d = $q.defer();
+		getHeaders();
 
-        getAuthorizationHeaders: function getAuthorizationHeaders() {
-            var loggedUser = getLocalUser();
-            if (loggedUser) {
-                setAuthorizationHeaders(loggedUser.sessionToken);
-            }
-            return headers;
-        },
+		$http({
+				method: 'GET',
+				url: userBaseUrl + 'ads/',
+				params: params
+			})
+			.success(function(data, status, headers, config) {
+				d.resolve(data);
+			})
+			.error(function(data, status, headers, config) {
+				d.reject(data);
+			});
 
-        isLoggedUser: function isLoggedUser() {
-            var sessionUser = $window.sessionStorage.getItem('UserData');
+		return d.promise;
+	}
 
-            return !!sessionUser;
 
-        },
-        isAuthorized: function isAuthorized(authorizedRoles) {
-            if (!angular.isArray(authorizedRoles)) {
-                authorizedRoles = [authorizedRoles];
-            }
-            return (authService.isAuthenticated() &&
-                authorizedRoles.indexOf(Session.userRole) !== -1);
-        },
-        getLoggedUser: function getLoggedUser() {
-            return JSON.parse($window.sessionStorage.getItem('UserData'));
-        },
-        setLoggedUser: function setLoggedUser(user) {
-            var sessionUser = {
-                username: user.username,
-                sessionToken: user.access_token
-            };
-            $window.sessionStorage.setItem('UserData', JSON.stringify(sessionUser));
-        },
-        register: function(user) {
-            var d = $q.defer();
-            $http({
-                    method: 'POST',
-                    url: baseUrl + 'register/',
-                    data: user
-                })
-                .success(function(userRegisterData) {
-                    d.resolve(userRegisterData);
-                })
-                .error(function(err) {
-                    d.reject(err);
-                });
+	return {
+		getAllUserAds: getAllUserAds,
+		getHeaders: getHeaders,
+		deactivateUserAd: deactivateUserAd,
+		publishUserAdAgain : publishUserAdAgain
 
-            return d.promise;
-        },
-        login: function login(user) {
-            var d = $q.defer();
-            $http({
-                    method: 'POST',
-                    url: baseUrl + 'login/',
-                    data: user
-                })
-                .success(function(userLoginData) {
-                    d.resolve(userLoginData);
-                })
-                .error(function(err) {
-                    d.reject(err);
-                });
-
-            return d.promise;
-        },
-        logout: function logout() {
-            delete sessionStorage.clear();
-            $window.location.href = '#/';
-        }
-    };
+	};
 });

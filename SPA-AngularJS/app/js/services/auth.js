@@ -6,14 +6,13 @@ softUniApp.factory('Auth', function($http, $q, $window) {
 
     function setAuthorizationHeaders(accessToken) {
         angular.extend(headers, {
-            Authorization: 'Bearer + ' + accessToken
+            Authorization: 'Bearer ' + accessToken
         });
     }
 
     function getLocalUser() {
         var savedUser = JSON.parse($window.sessionStorage.getItem('UserData'));
         if (savedUser) {
-         
             return savedUser;
         } else {
             return false;
@@ -87,6 +86,6 @@ softUniApp.factory('Auth', function($http, $q, $window) {
         logout: function logout() {
             delete sessionStorage.clear();
             $window.location.href = '#/';
-        }
+           }
     };
 });

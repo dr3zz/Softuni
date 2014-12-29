@@ -36,12 +36,6 @@ softUniApp.controller('MainController', function($scope, $filter, $rootScope, ma
 	};
 
 
-	$scope.adsRequestParams = {
-		startPage: 1,
-		pageSize: 4
-	};
-
-
 	function getFilteredData() {
 
 		if ($scope.activeTown !== null) {
