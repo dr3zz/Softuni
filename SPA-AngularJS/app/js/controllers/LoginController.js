@@ -60,6 +60,7 @@ softUniApp.controller('LoginController', function($scope, $window, Auth, mainDat
                 },
                 function(err) {
                     console.log(err);
+                    $window.location.href = '#/login';
                 }
             );
     }

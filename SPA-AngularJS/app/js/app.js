@@ -34,37 +34,37 @@ var softUniApp = angular.module('softUniApp', ['ngResource', 'ngRoute'])
 		});
 		$routeProvider.when('/user/ads/publish', {
 			title: 'Ads - Publish New ad',
-			templateUrl : 'templates/user/user-publish.html',
-			data : {
-				requireLogin : true
+			templateUrl: 'templates/user/user-publish.html',
+			data: {
+				requireLogin: true
 			}
 		});
-		$routeProvider.when ('/user/profile', {
+		$routeProvider.when('/user/profile', {
 			title: 'Ads - Edit User Profile',
-			templateUrl : 'templates/user/user-edit-profile.html',
-			data :{
-				requireLogin:true
+			templateUrl: 'templates/user/user-edit-profile.html',
+			data: {
+				requireLogin: true
 			}
 		});
-		$routeProvider.when ('/user/ads',{
+		$routeProvider.when('/user/ads', {
 			title: 'Ads - My ads',
 			templateUrl: 'templates/user/user-ads.html',
-			data : {
-				requireLogin : true
+			data: {
+				requireLogin: true
 			}
 		});
 		$routeProvider.when('/user/ads/edit/:id', {
 			title: 'edit ad',
-			templateUrl : 'templates/user/user-edit-ad.html',
-			data : {
-				requireLogin : true
+			templateUrl: 'templates/user/user-edit-ad.html',
+			data: {
+				requireLogin: true
 			}
 		});
 		$routeProvider.when('/user/ads/delete/:id', {
-			title : "delete add",
-			templateUrl : 'templates/user/user-delete-ad.html',
-			data : {
-				requireLogin : true
+			title: "delete add",
+			templateUrl: 'templates/user/user-delete-ad.html',
+			data: {
+				requireLogin: true
 			}
 		});
 
@@ -81,14 +81,18 @@ var softUniApp = angular.module('softUniApp', ['ngResource', 'ngRoute'])
 		};
 		$rootScope.$on('$routeChangeSuccess', function(event, current, previous) {
 			$rootScope.page.setTitle(current.$$route.title || 'Default Title');
-			
+
 		});
 		$rootScope.$on('$routeChangeStart', function(event, next) {
-			
+
 			if (!Auth.isLoggedUser() && next.data.requireLogin) {
 				$location.path('/');
-			}
-			
+
+			} else if (Auth.isLoggedUser() && !next.data.requireLogin) {
+				console.log('already logged');
+				$location.path('/user/home');
+			} 
+
 		});
 	})
 	.constant('baseUrl', 'http://localhost:1337/api/')

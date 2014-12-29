@@ -5,11 +5,11 @@
 .link-active {
   background-color: green;
 }
+
 .centered {
+	text-align: center;
 	float: none !important;
-	text-align: center !important;
+	display: inline-block;
+	width: 100%;
 }
-.rigth {
-	float: none !important;
-	text-align: right;
-}
+
