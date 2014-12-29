@@ -27,21 +27,49 @@ var softUniApp = angular.module('softUniApp', ['ngResource', 'ngRoute'])
 		});
 		$routeProvider.when('/user/home', {
 			title: 'Ads - Home',
-			templateUrl: 'templates/user/home.tpl.html',
+			templateUrl: 'templates/user/user-home.html',
 			data: {
 				requireLogin: true
 			}
 		});
 		$routeProvider.when('/user/ads/publish', {
 			title: 'Ads - Publish New ad',
-			templateUrl : 'templates/user/publish.tpl.html',
+			templateUrl : 'templates/user/user-publish.html',
 			data : {
-				requiredLogin : true
+				requireLogin : true
+			}
+		});
+		$routeProvider.when ('/user/profile', {
+			title: 'Ads - Edit User Profile',
+			templateUrl : 'templates/user/user-edit-profile.html',
+			data :{
+				requireLogin:true
+			}
+		});
+		$routeProvider.when ('/user/ads',{
+			title: 'Ads - My ads',
+			templateUrl: 'templates/user/user-ads.html',
+			data : {
+				requireLogin : true
+			}
+		});
+		$routeProvider.when('/user/ads/edit/:id', {
+			title: 'edit ad',
+			templateUrl : 'templates/user/user-edit-ad.html',
+			data : {
+				requireLogin : true
+			}
+		});
+		$routeProvider.when('/user/ads/delete/:id', {
+			title : "delete add",
+			templateUrl : 'templates/user/user-delete-ad.html',
+			data : {
+				requireLogin : true
 			}
 		});
 
 		$routeProvider.otherwise({
-			title: '',
+			title: 'Ads - Home',
 			redirectTo: '/'
 		});
 

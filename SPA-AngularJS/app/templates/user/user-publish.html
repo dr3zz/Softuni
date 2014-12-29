@@ -1,0 +1,40 @@
+<div class='jumbotron'>
+	<div class='row'>
+		<div class='col-md-3'>
+			<div  data-ng-include="'templates/layouts/layout.userMenu.html'">
+			</div>
+		</div>
+		<div class='col-md-9'>
+			<div class="panel panel-success">
+				<div class='panel-body'>
+			  <form class="form-horizontal" id="publish-new-ad" data-ng-controller="UserController" >
+                <fieldset>
+                  <div class='panel-heading centered'><legend>Publish New Ad</legend></div>
+                  <div class="form-group">
+                    <label for="username" class="col-lg-2 control-label">Username</label>
+                    <div class="col-lg-10">
+                      <input type="text" id="username" data-ng-model="username" class="form-control input-sm" placeholder="Username">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="password" class="col-lg-2 control-label">Password</label>
+                    <div class="col-lg-10">
+                      <input type="password" id="password" data-ng-model="password" class="form-control input-sm" placeholder="Password">
+                    </div>
+                  </div>
+                 
+                
+                  <div class="form-group">
+                    <div class="col-lg-10 col-lg-offset-2">
+                      
+                      <a type="submit" href="" class="btn btn-primary" data-ng-click="login()">Login</a>
+                      <a href="#/register" class="btn btn-default">Register here</a>
+                    </div>
+                  </div>
+                </fieldset>
+              </form>
+          </div>
+	</div>
+		</div>
+	</div>
+</div>
