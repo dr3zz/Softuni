@@ -1,5 +1,5 @@
 <div class="well bs-component">
-  <form form class="form-horizontal" name="registerForm" role="registration" data-ng-controller="UserController">
+  <form form class="form-horizontal" name="registerForm" role="registration" data-ng-controller="LoginController">
     <fieldset>
       <legend style='text-align:center'>User Registration</legend>
       <div class="form-group">
@@ -97,17 +97,21 @@
         </div>
         <div class='col-lg-4'>
           <label for="inputEmail" class="control-label">Town:</label>
-          <select  class='form-control' name="townId" ng-model="registerObj.townId">
+          <select  class='form-control' name="townId" ng-model="townName">
            <option data-ng-repeat="town in towns">{{town.name}}</option>
          </select>
        </div>
      </div>
 
      <div class="form-group">
-      <div class="col-lg-offset-1">
+      <div class="col-lg-4 col-lg-offset-1">
         <button type="submit" class="btn btn-primary" data-ng-click="register(registerObj,registerForm)" ng-class="{ 'btn-primary': registerForm.$valid && registerForm.$dirty, 'btn-success': redirect }"
         ng-disabled="registerForm.$invalid || registerForm.$pristine || xhr || redirect">Register</button>
       </div>
+     <div class="col-lg-4 col-lg-offset-1">
+        <a href="#/login" class="btn btn-default" >Login here</a>
+      </div>
     </div>
+    
   </fieldset>
 </form>

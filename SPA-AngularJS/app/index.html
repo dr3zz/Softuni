@@ -16,7 +16,7 @@
     <div class="container">
         <div class='row'>
           <div class='centered'><h1  id='type' >{{page.title}}</h1 >
-          <span data-ng-controller="UserController" class='rigth'>
+          <span data-ng-controller="LoginController" class='rigth'>
             <p data-ng-if="userData.isLoggedUser()" class="navbar-link" id="greeting">
               {{userData.getLoggedUser().username}}
               <a href="" data-ng-click="logout()" class='btn btn-default'>Logout</a>
@@ -35,7 +35,7 @@
 <script src="lib/angular/angular-resource.js"></script>
 <script src="js/app.js"></script>
 <script type="text/javascript" src='js/controllers/MainController.js'></script>
-<script type="text/javascript" src='js/controllers/UserController.js'></script>
+<script type="text/javascript" src='js/controllers/LoginController.js'></script>
 <script type="text/javascript" src='js/services/mainPage.js'></script>
 <script type="text/javascript" src='js/services/userData.js'></script>
 <!-- <script type="text/javascript" src='js/dirPagination.js'></script> -->

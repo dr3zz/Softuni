@@ -1,7 +1,15 @@
-<div class="well bs-component">
-              <form class="form-horizontal" id="login-form" data-ng-controller="LoginController" >
+<div class='jumbotron'>
+	<div class='row'>
+		<div class='col-md-3'data-ng-controller="LoginController">
+			<div  data-ng-include="'templates/layouts/layout.userMenu.html'">
+			</div>
+		</div>
+		<div class='col-md-9'>
+			<div class="panel panel-success">
+				<div class='panel-body'>
+			  <form class="form-horizontal" id="publish-new-ad" data-ng-controller="UserController" >
                 <fieldset>
-                  <legend>Legend</legend>
+                  <div class='panel-heading centered'><legend>Publish New Ad</legend></div>
                   <div class="form-group">
                     <label for="username" class="col-lg-2 control-label">Username</label>
                     <div class="col-lg-10">
@@ -25,6 +33,8 @@
                   </div>
                 </fieldset>
               </form>
-         
-
-       
+          </div>
+	</div>
+		</div>
+	</div>
+</div>
