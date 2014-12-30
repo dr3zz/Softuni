@@ -5,9 +5,7 @@ softUniApp.factory('Auth', function($http, $q, $window) {
     var headers = {};
 
     function setAuthorizationHeaders(accessToken) {
-        angular.extend(headers, {
-            Authorization: 'Bearer ' + accessToken
-        });
+        angular.extend(headers, accessToken);
     }
 
     function getLocalUser() {
@@ -19,11 +17,21 @@ softUniApp.factory('Auth', function($http, $q, $window) {
         }
     }
     return {
-
+        removeAuthorizationHeaders: function removeAuthorizationHeaders() {
+            $window.sessionStorage.removeItem('UserData');
+        },
         getAuthorizationHeaders: function getAuthorizationHeaders() {
             var loggedUser = getLocalUser();
             if (loggedUser) {
-                setAuthorizationHeaders(loggedUser.sessionToken);
+                var head = {};
+
+                head['Authorization'] = 'Bearer ' + loggedUser.sessionToken;
+
+                setAuthorizationHeaders(head);
+            } else {
+                var head = {};
+                setAuthorizationHeaders(head);
+                console.log("az sum");
             }
             return headers;
         },
@@ -34,22 +42,28 @@ softUniApp.factory('Auth', function($http, $q, $window) {
             return !!sessionUser;
 
         },
-        isAuthorized: function isAuthorized(authorizedRoles) {
-            if (!angular.isArray(authorizedRoles)) {
-                authorizedRoles = [authorizedRoles];
-            }
-            return (authService.isAuthenticated() &&
-                authorizedRoles.indexOf(Session.userRole) !== -1);
-        },
+        // isAuthorized: function isAuthorized(authorizedRoles) {
+        //     if (!angular.isArray(authorizedRoles)) {
+        //         authorizedRoles = [authorizedRoles];
+        //     }
+        //     return (authService.isAuthenticated() &&
+        //         authorizedRoles.indexOf(Session.userRole) !== -1);
+        // },
         getLoggedUser: function getLoggedUser() {
             return JSON.parse($window.sessionStorage.getItem('UserData'));
         },
         setLoggedUser: function setLoggedUser(user) {
-            var sessionUser = {
-                username: user.username,
-                sessionToken: user.access_token
-            };
-            $window.sessionStorage.setItem('UserData', JSON.stringify(sessionUser));
+            if (!!user) {
+                var sessionUser = {
+                    username: user.username,
+                    sessionToken: user.access_token
+                };
+                $window.sessionStorage.setItem('UserData', JSON.stringify(sessionUser));
+            } else {
+                console.log("delete session storage 'UserData'");
+                console.log($window.sessionStorage.getItem('UserData'));
+            }
+
         },
         register: function(user) {
             var d = $q.defer();
@@ -83,9 +97,22 @@ softUniApp.factory('Auth', function($http, $q, $window) {
 
             return d.promise;
         },
-        logout: function logout() {
-            delete sessionStorage.clear();
-            $window.location.href = '#/';
-           }
+        logout: function logout(headers) {
+            var d = $q.defer();
+            $http({
+                    method: 'POST',
+                    url: baseUrl + 'logout/',
+                    headers: headers,
+                    data: {}
+                })
+                .success(function(userLogoutData) {
+                    d.resolve(userLogoutData);
+                })
+                .error(function(logoutError) {
+                    d.reject(logoutError);
+                });
+            return d.promise;
+        }
+
     };
 });

@@ -1,5 +1,5 @@
 var softUniApp = angular.module('softUniApp', ['ngResource', 'ngRoute'])
-	.config(function($routeProvider) {
+	.config(function($routeProvider,$locationProvider) {
 
 		$routeProvider.when('/register', {
 			title: 'Ads - Registration',
@@ -27,51 +27,59 @@ var softUniApp = angular.module('softUniApp', ['ngResource', 'ngRoute'])
 		});
 		$routeProvider.when('/user/home', {
 			title: 'Ads - Home',
-			templateUrl: 'templates/user/user-home.html',
+			templateUrl: 'templates/all-ads.html',
 			data: {
 				requireLogin: true
-			}
+			},
+			controller: 'UserController'
 		});
 		$routeProvider.when('/user/ads/publish', {
 			title: 'Ads - Publish New ad',
 			templateUrl: 'templates/user/user-publish.html',
 			data: {
 				requireLogin: true
-			}
+			},
+			
 		});
 		$routeProvider.when('/user/profile', {
 			title: 'Ads - Edit User Profile',
 			templateUrl: 'templates/user/user-edit-profile.html',
 			data: {
 				requireLogin: true
-			}
+			},
+			
 		});
 		$routeProvider.when('/user/ads', {
 			title: 'Ads - My ads',
 			templateUrl: 'templates/user/user-ads.html',
 			data: {
 				requireLogin: true
-			}
+			},
+			controller : 'UserController'
+			
 		});
 		$routeProvider.when('/user/ads/edit/:id', {
 			title: 'edit ad',
 			templateUrl: 'templates/user/user-edit-ad.html',
 			data: {
 				requireLogin: true
-			}
+			},
+			
 		});
 		$routeProvider.when('/user/ads/delete/:id', {
-			title: "delete add",
+			title: "Ads - Delete Ad",
 			templateUrl: 'templates/user/user-delete-ad.html',
 			data: {
 				requireLogin: true
-			}
+			},
+
 		});
 
 		$routeProvider.otherwise({
 			title: 'Ads - Home',
 			redirectTo: '/'
 		});
+		// $locationProvider.html5Mode(true);
 
 	}).run(function($location, $rootScope, Auth) {
 		$rootScope.page = {
@@ -90,8 +98,13 @@ var softUniApp = angular.module('softUniApp', ['ngResource', 'ngRoute'])
 
 			} else if (Auth.isLoggedUser() && !next.data.requireLogin) {
 				console.log('already logged');
+
 				$location.path('/user/home');
-			} 
+			}
+			// if(Auth.isLoggedUser && next.data.requireLogin) {
+			// 	userData.getHeaders();
+			// 	console.log('headers');
+			// }
 
 		});
 	})

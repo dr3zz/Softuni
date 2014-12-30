@@ -1,15 +1,27 @@
 <div class='jumbotron'>
 	<div class='row'>
-		<div class='col-md-3'>
-			<div  data-ng-include="'templates/layouts/layout.register-login.html'">
+		<div class='col-md-3' data-ng-controller="LoginController">
+			<div data-ng-if="!userData.isLoggedUser()">
+				<div  data-ng-include="'templates/layouts/layout.register-login.html'">
 			</div>
+			</div>
+			<div data-ng-if="userData.isLoggedUser()">
+				<div  data-ng-include="'templates/layouts/layout.userMenu.html'">
+			</div>
+			</div>
+			
 		</div>
 		<div class='col-md-6'>
-			<div data-ng-include ="'templates/layouts/all-ads.tpl.html'"></div>
+			
+				<div data-ng-include ="'templates/layouts/all-ads.tpl.html'"></div>
+			
+			
 		</div>
 		<div class='col-md-3'>
-			<div data-ng-include="'templates/layouts/layout.filter.html'">
-			</div>
+			<div class="bs-component">
+			<div filtercontroller filtertowns></div>
+				<div filtercontroller filtercategories></div>
+		</div>
 		</div>
 	</div>
 </div>

@@ -1,0 +1,13 @@
+<div class="panel panel-success">
+		<div class="panel-heading">
+			<h3 class="panel-title">Panel primary</h3>
+		</div>
+		<div class="panel-body" >
+			<p class="bs-component">
+				<a href="" data-ng-click="selectedTown()" class="btn btn-primary" data-ng-class="{'active': 'all' == activeTown}" >All towns</a>
+			</p>	
+			<p class="bs-component" data-ng-repeat="town in towns">
+				<a href="" data-ng-click="selectedTown(town.id)" class="btn btn-primary" data-ng-class="{'active': town.id == activeTown}" >{{town.name}} {{town.id}}</a>
+			</p>
+		</div>
+	</div>

@@ -3,7 +3,7 @@
     <li  data-ng-class="{disabled: 1 == activePage}"><a href="" data-ng-click="firstPage()">First</a></li>
     <li data-ng-class="{disabled: 1 == activePage}"><a href="" data-ng-click="prevPage()">Previous</a></li>
 
-    <li data-ng-repeat="i in pagesArr track by $index" data-id="{{$index + 1}}" data-ng-class="{active: $index+1 == activePage  }">
+    <li data-ng-repeat="i in pagesArr track by $index" data-ng-class="{active: $index+1 == activePage  }">
         <a href=""  data-ng-click="setStartPage($index+1)">{{$index + 1}}</a>
     </li>
 

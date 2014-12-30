@@ -1,9 +1,7 @@
 softUniApp.controller('MainController', function($scope, $filter, $rootScope, mainData, pageSize) {
-	$scope.activeCategory = null;
-	$scope.activeTown = null;
-	$scope.activePage = 1;
+	
 	$scope.getAds = function(requestParams) {
-		getFilteredData();
+	
 		mainData.getAllAds(requestParams).then(function(data) {
 
 				$scope.dataAds = data.ads;
@@ -32,42 +30,11 @@ softUniApp.controller('MainController', function($scope, $filter, $rootScope, ma
 	};
 	$scope.adsRequestParams = {
 		startPage: 1,
-		pageSize: pageSize
+		pageSize: pageSize,
+		townId : null,
+		categoryId : null
 	};
 
-
-	function getFilteredData() {
-
-		if ($scope.activeTown !== null) {
-
-			$scope.adsRequestParams['townid'] = $scope.activeTown;
-			$scope.adsRequestParams.startPage = 1;
-		} else {
-			if ($scope.adsRequestParams['townid']) {
-				delete $scope.adsRequestParams['townid'];
-			}
-		}
-		if ($scope.activeCategory !== null) {
-			$scope.adsRequestParams['categoryid'] = $scope.activeCategory;
-			$scope.adsRequestParams.startPage = 1;
-
-		} else {
-			if ($scope.adsRequestParams['categoryid']) {
-				delete $scope.adsRequestParams['categoryid'];
-			}
-		}
-	}
-	$scope.removeFilters = function() {
-		if ($scope.activeTown) {
-			$scope.activeTown = null;
-		}
-		if ($scope.activeCategory) {
-			$scope.activeCategory = null;
-		}
-		getFilteredData();
-		$scope.getAds($scope.adsRequestParams);
-
-	};
 
 
 	$scope.selectedTown = function(id) {
