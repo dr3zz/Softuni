@@ -59,11 +59,7 @@ softUniApp.factory('Auth', function($http, $q, $window) {
                     sessionToken: user.access_token
                 };
                 $window.sessionStorage.setItem('UserData', JSON.stringify(sessionUser));
-            } else {
-                console.log("delete session storage 'UserData'");
-                console.log($window.sessionStorage.getItem('UserData'));
             }
-
         },
         register: function(user) {
             var d = $q.defer();

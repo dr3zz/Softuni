@@ -7,7 +7,7 @@
 		<div class='col-md-9' >
 			<div class="panel panel-success">
 				<div class='panel-body'>
-         <form class="form-horizontal" id="publish-new-ad" >
+         <form class="form-horizontal" name='publishad' id="publish-new-ad" >
           <fieldset>
             <div class='panel-heading centered'><legend>Publish New Ad</legend></div>
             <div class='row '>
@@ -15,20 +15,39 @@
                <div class="form-group">
                 <label for="title" class="col-lg-2 control-label">Title:</label>
                 <div class="col-lg-10">
-                  <input type="text" id="title" data-ng-model="newAdObj.title" class="form-control input-sm" placeholder="Title">
+                  <input type="text" id="title" data-ng-model="newAdObj.title" class="form-control " placeholder="Title" autofocus="true" name='title' ng-minlength="4" ng-maxlength="50" ng-required="true" required>
+                  <span class="help-block">required*</span>
+                  <div class="errors" ng-class="{ active: publishad.title.$invalid && publishad.title.$dirty }">
+                    <div class="error ng-hide" ng-show="publishad.title.$error.minlength">
+                      <p>Min Title lenght is 4.</p>
+                    </div>
+                    <div class="error ng-hide" ng-show="publishad.title.$error.maxlength">
+                      <p>Max Title length is 50, please shorten it.</p>
+                    </div>
+                  </div>
                 </div>
               </div>
               <div class="form-group">
                 <label for="text" class="col-lg-2 control-label">Text:</label>
                 <div class="col-lg-10">
-                  <textarea type="password" id="text" data-ng-model="newAdObj.text" class="form-control input-sm" placeholder="Password"></textarea>
+                  <textarea type="password" rows='6' id="text" data-ng-model="newAdObj.text" class="form-control " name'adText' placeholder="text" name='adText' ng-minlength='10' ng-maxlength='285' ng-required="true"></textarea>
+                  <span class="help-block">Description about the ad
+required*</span>
+                  <div class="errors" ng-class="{ active: publishad.adText.$invalid && publishad.adText.$dirty }" required>
+                    <div class="error ng-hide" ng-show="publishad.adText.$error.minlength">
+                      <p>Min Text lenght  is 10.</p>
+                    </div>
+                    <div class="error ng-hide" ng-show="publishad.adText.$error.maxlength">
+                      <p>Max Text length is 285, please shorten it.</p>
+                    </div>
+                  </div>
                 </div>
               </div>
               <div class="form-group">
                 <label for="image" class="col-lg-2 control-label">Image:</label>
-                <div class="col-lg-6">
-                  <input id='filepath' type='text'>
-                  <input type="file"  data-ng-model="newAdObj.imageDataUrl" class="form-control input-sm" accept="image/*" id='imageInfo'>
+                <div class="col-lg-8">
+                  <div id='filepath' class='well' type='text'></div>
+                  <input type="file"  data-ng-model="newAdObj.imageDataUrl" class="form-control input-sm" accept="image/*" id='imageInfo' app-filereader>
                 </div>
                 <div class='col-lg4'>
                   <button type="submit"  id='filebutton' href="" class="btn btn-primary" data-ng-click="">Browse</button>
@@ -54,15 +73,16 @@
             </div>
 
           </div>
-            <div class='col-lg-4 publish-ad-imate-container'>
-              <img id="thumbnil"  src="{{doc.image_url | searchResultImg}}" data-ng-src="{{newAdObj.imageDataUrl}}"alt=""/>
-              <div>200x200</div>
-            </div>
+          <div class='col-lg-4 publish-ad-imate-container'>
+            <img id="thumbnil"  src="{{doc.image_url | searchResultImg}}" alt=""/>
+            <div>200x200</div>
+          </div>
         </div>
         <div class="form-group">
           <div class="col-lg-10 col-lg-offset-2">
 
-            <a type="submit" href="" class="btn btn-primary" data-ng-click="">Login</a>
+            <a type="submit" href="" class="btn btn-primary" data-ng-click="createNewAd(newAdObj,publishad)"ng-class="{ 'btn-primary': publishad.$valid && publishad.$dirty, 'btn-success': redirect }"
+        ng-disabled="publishad.$invalid || publishad.$pristine || xhr || redirect">Login</a>
             <a href="" class="btn btn-default">Register here</a>
           </div>
         </div>

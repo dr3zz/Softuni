@@ -20,7 +20,8 @@ softUniApp.controller('UserController', function($scope, $filter, $window, $root
 	$scope.createNewAd = function () {
 		userData.createNewAd($scope.newAdObj).then(function (data) {
 			console.log("new add");
-			//TODO do something
+			$window.location.href = '#/user/ads';
+		
 		},function (err) {
 			console.log('publish add error' + err);
 		});
@@ -46,6 +47,10 @@ softUniApp.controller('UserController', function($scope, $filter, $window, $root
 		$window.location.href = '#/user/ads/delete/' + ad.id;
 	};
 	
+	// $scope.printAdd = function (obj) {
+	// 	console.info(obj);
+	// 	$window.location.href = '#/user/ads';
+	// };
 
 	function checkIfUserIsLogged() {
 		if (Auth.isLoggedUser()) {
