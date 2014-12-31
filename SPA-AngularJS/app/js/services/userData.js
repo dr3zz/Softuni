@@ -21,6 +21,23 @@ softUniApp.factory('userData', function($http, $q, baseUrl, Auth) {
 		return d.promise;
 	}
 
+	function createNewAd(data) {
+		var d = $q.defer();
+		var url = userBaseUrl + 'ads/';
+		$http({
+			method : 'POST',
+			url: url,
+			data : data
+		})
+		.success(function (data,status,headers,config) {
+			d.resolve(data);
+		})
+		.error(function (data,status,headers,config) {
+			d.reject(data);
+		});
+		return d.promise;
+	}
+
 	function deleteUserAd(id) {
 		var d = $q.defer();
 		var url = userBaseUrl + 'ads/' + id;
@@ -56,7 +73,7 @@ softUniApp.factory('userData', function($http, $q, baseUrl, Auth) {
 	function getAllUserAds(params) {
 		getHeaders();
 		var d = $q.defer();
-			$http({
+		$http({
 				method: 'GET',
 				url: userBaseUrl + 'ads/',
 				params: params
@@ -77,7 +94,8 @@ softUniApp.factory('userData', function($http, $q, baseUrl, Auth) {
 		getHeaders: getHeaders,
 		deactivateUserAd: deactivateUserAd,
 		publishUserAdAgain: publishUserAdAgain,
-		deleteUserAd: deleteUserAd
+		deleteUserAd: deleteUserAd,
+		createNewAd : createNewAd
 
 	};
 });

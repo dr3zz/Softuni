@@ -17,6 +17,14 @@ softUniApp.controller('UserController', function($scope, $filter, $window, $root
 		pageSize: 2,
 		status : null
 	};
+	$scope.createNewAd = function () {
+		userData.createNewAd($scope.newAdObj).then(function (data) {
+			console.log("new add");
+			//TODO do something
+		},function (err) {
+			console.log('publish add error' + err);
+		});
+	};
 	$scope.publishAdAgain = function(id) {
 		userData.publishUserAdAgain(id).then(function(data) {
 				$scope.getAds($scope.adsRequestParams);

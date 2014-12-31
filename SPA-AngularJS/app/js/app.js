@@ -6,7 +6,9 @@ var softUniApp = angular.module('softUniApp', ['ngResource', 'ngRoute'])
 			templateUrl: 'templates/register.html',
 			data: {
 				requireLogin: false
-			}
+			},
+			controller : 'LoginController'
+
 
 		});
 		$routeProvider.when('/login', {
@@ -14,7 +16,8 @@ var softUniApp = angular.module('softUniApp', ['ngResource', 'ngRoute'])
 			templateUrl: 'templates/login.html',
 			data: {
 				requireLogin: false
-			}
+			},
+			controller: 'LoginController'
 
 		});
 		$routeProvider.when('/', {
@@ -22,7 +25,8 @@ var softUniApp = angular.module('softUniApp', ['ngResource', 'ngRoute'])
 			templateUrl: 'templates/all-ads.html',
 			data: {
 				requireLogin: false
-			}
+			},
+			controller: 'MainController'
 
 		});
 		$routeProvider.when('/user/home', {
@@ -31,7 +35,7 @@ var softUniApp = angular.module('softUniApp', ['ngResource', 'ngRoute'])
 			data: {
 				requireLogin: true
 			},
-			controller: 'UserController'
+			controller: 'MainController',
 		});
 		$routeProvider.when('/user/ads/publish', {
 			title: 'Ads - Publish New ad',
@@ -39,6 +43,7 @@ var softUniApp = angular.module('softUniApp', ['ngResource', 'ngRoute'])
 			data: {
 				requireLogin: true
 			},
+			controller : 'UserController'
 			
 		});
 		$routeProvider.when('/user/profile', {
@@ -47,6 +52,7 @@ var softUniApp = angular.module('softUniApp', ['ngResource', 'ngRoute'])
 			data: {
 				requireLogin: true
 			},
+			controller : 'UserController'
 			
 		});
 		$routeProvider.when('/user/ads', {
@@ -64,6 +70,7 @@ var softUniApp = angular.module('softUniApp', ['ngResource', 'ngRoute'])
 			data: {
 				requireLogin: true
 			},
+			controller : 'UserController'
 			
 		});
 		$routeProvider.when('/user/ads/delete/:id', {
@@ -72,6 +79,7 @@ var softUniApp = angular.module('softUniApp', ['ngResource', 'ngRoute'])
 			data: {
 				requireLogin: true
 			},
+			controller : 'UserController'
 
 		});
 
