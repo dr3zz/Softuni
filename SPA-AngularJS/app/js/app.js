@@ -1,5 +1,5 @@
 var softUniApp = angular.module('softUniApp', ['ngResource', 'ngRoute'])
-	.config(function($routeProvider,$locationProvider) {
+	.config(function($routeProvider, $locationProvider) {
 
 		$routeProvider.when('/register', {
 			title: 'Ads - Registration',
@@ -7,7 +7,7 @@ var softUniApp = angular.module('softUniApp', ['ngResource', 'ngRoute'])
 			data: {
 				requireLogin: false
 			},
-			controller : 'LoginController'
+			controller: 'LoginController'
 
 
 		});
@@ -43,8 +43,8 @@ var softUniApp = angular.module('softUniApp', ['ngResource', 'ngRoute'])
 			data: {
 				requireLogin: true
 			},
-			controller : 'UserController'
-			
+			controller: 'UserController'
+
 		});
 		$routeProvider.when('/user/profile', {
 			title: 'Ads - Edit User Profile',
@@ -52,8 +52,8 @@ var softUniApp = angular.module('softUniApp', ['ngResource', 'ngRoute'])
 			data: {
 				requireLogin: true
 			},
-			controller : 'UserController'
-			
+			controller: 'UserController'
+
 		});
 		$routeProvider.when('/user/ads', {
 			title: 'Ads - My ads',
@@ -61,8 +61,8 @@ var softUniApp = angular.module('softUniApp', ['ngResource', 'ngRoute'])
 			data: {
 				requireLogin: true
 			},
-			controller : 'UserController'
-			
+			controller: 'UserController'
+
 		});
 		$routeProvider.when('/user/ads/edit/:id', {
 			title: 'edit ad',
@@ -70,8 +70,8 @@ var softUniApp = angular.module('softUniApp', ['ngResource', 'ngRoute'])
 			data: {
 				requireLogin: true
 			},
-			controller : 'UserController'
-			
+
+
 		});
 		$routeProvider.when('/user/ads/delete/:id', {
 			title: "Ads - Delete Ad",
@@ -79,7 +79,8 @@ var softUniApp = angular.module('softUniApp', ['ngResource', 'ngRoute'])
 			data: {
 				requireLogin: true
 			},
-			controller : 'UserController'
+		
+
 
 		});
 
@@ -109,11 +110,7 @@ var softUniApp = angular.module('softUniApp', ['ngResource', 'ngRoute'])
 
 				$location.path('/user/home');
 			}
-			// if(Auth.isLoggedUser && next.data.requireLogin) {
-			// 	userData.getHeaders();
-			// 	console.log('headers');
-			// }
-
+			
 		});
 	})
 	.constant('baseUrl', 'http://localhost:1337/api/')

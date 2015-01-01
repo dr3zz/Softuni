@@ -1,1 +1,59 @@
-<div filterUserAds></div>
+<div data-ng-controller="DeleteAdController" >
+	
+	<div class='container '>
+
+		<div class="panel panel-success">
+			<div class='panel-body'>
+				
+						<div class='panel-heading centered'><legend>Confirm Deleting Ad?</legend></div>
+						<div class='row'>
+							<div class='col-md-7'>
+								<h3 class='pull-left'>
+									{{adForDelete.title}}
+								</h3>
+							</div>
+							<div class='col-md-5'>
+								<span class='pull-right'>
+									{{adForDelete.date | date:'dd-MMM-yyyy'}}
+								</span>
+							</div>
+						</div>
+						<div class='row'>
+							<div class='col-md-4 image-container'>
+								<img src="" data-ng-src="{{adForDelete.imageDataUrl}}">
+								<img src="" alt="" data-ng-if="!adForDelete.imageDataUrl" data-ng-src="imgs/no-image.jpg"/>
+							</div>
+							<div class='col-md-8'>
+								<div class='well'>
+									{{adForDelete.text}}
+								</div>
+								<div class='row'>
+									<div class='col-md-3 '>
+										Category:
+									</div>
+									<div class='col-md-9 '>
+										<div class='form-control'>{{adForDelete.categoryName}}</div>
+									</div>
+									<div class='col-md-3'>
+										Town: 
+									</div>
+									<div class='col-md-9'>
+										<div class='form-control'>{{adForDelete.townName}}</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="col-lg-1 col-lg-offset-4">
+								<button type="submit" class="btn btn-primary btn-lg" data-ng-click='deleteAd()'>DELETE</button>
+							</div>
+							<div class="col-lg-1 col-lg-offset-1">
+								<a href="#/user/ads" class="btn btn-default btn-lg">Cancel</a>
+							</div>
+						</div>
+				
+			</div>
+		</div>
+	</div>
+
+</div>

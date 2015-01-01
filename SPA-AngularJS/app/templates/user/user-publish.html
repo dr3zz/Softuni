@@ -53,7 +53,8 @@ required*</span>
                   <button type="submit"  id='filebutton' href="" class="btn btn-primary" data-ng-click="">Browse</button>
                 </div>
               </div>
-              <div class='form-group' data-ng-controller="MainController">
+
+              <div class='form-group' data-ng-controller="TownsController">
                 <label for="inputEmail" class="col-lg-2 control-label">Town:</label>
                 <div class='col-lg-10'>
                   <select  class='form-control' name="townId"  ng-model="newAdObj.townId">
@@ -62,7 +63,7 @@ required*</span>
                  </select>
                </div>
              </div>
-             <div class='form-group' data-ng-controller="MainController">
+             <div class='form-group' data-ng-controller="CategoriesController">
               <label for="inputEmail" class="col-lg-2 control-label">Category:</label>
               <div class='col-lg-10'>
                 <select  class='form-control' name="categoryId"  ng-model="newAdObj.categoryId">
@@ -81,9 +82,10 @@ required*</span>
         <div class="form-group">
           <div class="col-lg-10 col-lg-offset-2">
 
-            <a type="submit" href="" class="btn btn-primary" data-ng-click="createNewAd(newAdObj,publishad)"ng-class="{ 'btn-primary': publishad.$valid && publishad.$dirty, 'btn-success': redirect }"
-        ng-disabled="publishad.$invalid || publishad.$pristine || xhr || redirect">Login</a>
-            <a href="" class="btn btn-default">Register here</a>
+            <a type="submit" href="" class="btn btn-primary btn-lg col-lg-offset-2" data-ng-click="createNewAd(newAdObj,publishad)"ng-class="{ 'btn-primary': publishad.$valid && publishad.$dirty, 'btn-success': redirect }"
+        ng-disabled="publishad.$invalid || publishad.$pristine || xhr || redirect">Publish</a>
+
+            <a href="#/user/ads" class="col-lg-offset-1 btn btn-default btn-lg">Cancle</a>
           </div>
         </div>
       </fieldset>

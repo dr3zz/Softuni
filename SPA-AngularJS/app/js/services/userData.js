@@ -1,5 +1,18 @@
-softUniApp.factory('userData', function($http, $q, baseUrl, Auth) {
+softUniApp.factory('userData', function($http, $q, baseUrl, Auth, $rootScope) {
 	var userBaseUrl = baseUrl + "user/";
+	var service = {};
+	service.adForDelete = {};
+	service.adForEdit = {};
+	
+	service.updateAdForDelete = function(value) {
+		this.adForDelete = value;
+		$rootScope.$broadcast('valueUpdated');
+	};
+
+	service.updateAdForEdit = function(value) {
+		this.adForEdit = value;
+		$rootScope.$broadcast('valueUpdated');
+	};
 
 	function getHeaders() {
 		$http.defaults.headers.common['Authorization'] = Auth.getAuthorizationHeaders().Authorization;
@@ -25,16 +38,16 @@ softUniApp.factory('userData', function($http, $q, baseUrl, Auth) {
 		var d = $q.defer();
 		var url = userBaseUrl + 'ads/';
 		$http({
-			method : 'POST',
-			url: url,
-			data : data
-		})
-		.success(function (data,status,headers,config) {
-			d.resolve(data);
-		})
-		.error(function (data,status,headers,config) {
-			d.reject(data);
-		});
+				method: 'POST',
+				url: url,
+				data: data
+			})
+			.success(function(data, status, headers, config) {
+				d.resolve(data);
+			})
+			.error(function(data, status, headers, config) {
+				d.reject(data);
+			});
 		return d.promise;
 	}
 
@@ -59,6 +72,22 @@ softUniApp.factory('userData', function($http, $q, baseUrl, Auth) {
 		var url = userBaseUrl + "ads/deactivate/" + id;
 		$http({
 				method: 'PUT',
+				url: url
+			})
+			.success(function(data, status, headers, config) {
+				d.resolve(data);
+			})
+			.error(function(data, status, headers, config) {
+				d.reject(data);
+			});
+		return d.promise;
+	}
+
+	function getAdById(id) {
+		var d = $q.defer();
+		var url = userBaseUrl + 'ads/' + id;
+		$http({
+				method: 'GET',
 				url: url
 			})
 			.success(function(data, status, headers, config) {
@@ -95,7 +124,10 @@ softUniApp.factory('userData', function($http, $q, baseUrl, Auth) {
 		deactivateUserAd: deactivateUserAd,
 		publishUserAdAgain: publishUserAdAgain,
 		deleteUserAd: deleteUserAd,
-		createNewAd : createNewAd
+		createNewAd: createNewAd,
+		getAdById: getAdById,
+		service: service,
+
 
 	};
 });

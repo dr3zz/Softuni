@@ -1,5 +1,5 @@
-softUniApp.controller('UserController', function($scope, $filter, $window, $rootScope, Auth, userData, pageSize) {
-	
+softUniApp.controller('UserController', function($scope, $filter, $window, $rootScope, messaging, Auth, userData, pageSize) {
+
 	$scope.getAds = function(requestParams) {
 		userData.getAllUserAds(requestParams).then(function(data) {
 				$scope.userAds = data.ads;
@@ -15,15 +15,17 @@ softUniApp.controller('UserController', function($scope, $filter, $window, $root
 	$scope.adsRequestParams = {
 		startPage: 1,
 		pageSize: 2,
-		status : null
+		status: null
 	};
-	$scope.createNewAd = function () {
-		userData.createNewAd($scope.newAdObj).then(function (data) {
-			console.log("new add");
+	$scope.createNewAd = function() {
+		userData.createNewAd($scope.newAdObj).then(function(data) {
+			messaging.successMessage(data.message);
 			$window.location.href = '#/user/ads';
+
+		}, function(err) {
+			var error = errorMessageOnPublishAd(err);
+			messaging.errorMessage(error);
 		
-		},function (err) {
-			console.log('publish add error' + err);
 		});
 	};
 	$scope.publishAdAgain = function(id) {
@@ -42,15 +44,30 @@ softUniApp.controller('UserController', function($scope, $filter, $window, $root
 				console.log(err);
 			});
 	};
-
+	function errorMessageOnPublishAd(error) {
+		if(error.message) {
+			return "The Text and Title fields are required.";
+		}
+	}
 	$scope.loadDeleteAdPage = function(ad) {
 		$window.location.href = '#/user/ads/delete/' + ad.id;
+		userData.getAdById(ad.id).then(function(data) {
+			userData.service.updateAdForDelete(data);
+
+		}, function(err) {
+			console.log(err);
+		});
+
+
 	};
-	
-	// $scope.printAdd = function (obj) {
-	// 	console.info(obj);
-	// 	$window.location.href = '#/user/ads';
-	// };
+	$scope.loadEditAdPage = function(ad) {
+		$window.location.href = '#/user/ads/edit/' + ad.id;
+		userData.getAdById(ad.id).then(function(data) {
+			userData.service.updateAdForEdit(data);
+		}, function(err) {
+			console.log(err);
+		});
+	};
 
 	function checkIfUserIsLogged() {
 		if (Auth.isLoggedUser()) {
@@ -58,8 +75,7 @@ softUniApp.controller('UserController', function($scope, $filter, $window, $root
 		}
 	}
 
-	
-	
+
 
 	checkIfUserIsLogged();
 });
