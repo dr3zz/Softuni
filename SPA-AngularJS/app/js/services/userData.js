@@ -18,12 +18,13 @@ softUniApp.factory('userData', function($http, $q, baseUrl, Auth, $rootScope) {
 		$http.defaults.headers.common['Authorization'] = Auth.getAuthorizationHeaders().Authorization;
 	}
 
-	function publishUserAdAgain(id) {
+	function publishUserAdAgain(data) {
 		var d = $q.defer();
-		var url = userBaseUrl + 'ads/publishagain/' + id;
+		var url = userBaseUrl + 'ads/publishagain/' + data.id;
 		$http({
 				method: 'PUT',
-				url: url
+				url: url,
+				data : data
 			})
 			.success(function(data, status, headers, config) {
 				d.resolve(data);
@@ -33,7 +34,22 @@ softUniApp.factory('userData', function($http, $q, baseUrl, Auth, $rootScope) {
 			});
 		return d.promise;
 	}
-
+	function editUserAd (data) {
+		var d = $q.defer();
+		var url = userBaseUrl + 'ads/' + data.id;
+		$http({
+			method: 'PUT',
+			url:url,
+			data: data
+		})
+		.success(function (data,status,headers,config) {
+			d.resolve(data);
+		})
+		.error(function (data,status,headers,config) {
+			d.reject(data);
+		});
+		return d.promise;
+	}
 	function createNewAd(data) {
 		var d = $q.defer();
 		var url = userBaseUrl + 'ads/';
@@ -67,12 +83,13 @@ softUniApp.factory('userData', function($http, $q, baseUrl, Auth, $rootScope) {
 		return d.promise;
 	}
 
-	function deactivateUserAd(id) {
+	function deactivateUserAd(data) {
 		var d = $q.defer();
-		var url = userBaseUrl + "ads/deactivate/" + id;
+		var url = userBaseUrl + "ads/deactivate/" + data.id;
 		$http({
 				method: 'PUT',
-				url: url
+				url: url,
+				data:data
 			})
 			.success(function(data, status, headers, config) {
 				d.resolve(data);
@@ -126,6 +143,7 @@ softUniApp.factory('userData', function($http, $q, baseUrl, Auth, $rootScope) {
 		deleteUserAd: deleteUserAd,
 		createNewAd: createNewAd,
 		getAdById: getAdById,
+		editUserAd : editUserAd,
 		service: service,
 
 

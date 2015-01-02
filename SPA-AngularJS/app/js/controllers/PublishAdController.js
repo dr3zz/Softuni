@@ -10,14 +10,7 @@ softUniApp.controller('PublishAdController', function($scope, $filter, $window, 
 		
 		});
 	};
-	$scope.publishAdAgain = function(id) {
-		userData.publishUserAdAgain(id).then(function(data) {
-				$scope.getAds($scope.adsRequestParams);
-			},
-			function(err) {
-				console.log(err);
-			});
-	};
+	
 	
 	function errorMessageOnPublishAd(error) {
 		if(error.message) {

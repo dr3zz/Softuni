@@ -1,56 +1,84 @@
 edit user add
 
 <div class='container '>
-	<div class='col-md-12' >
-			<div class="panel panel-success">
-				<div class='panel-body'>
-         <form class="form-horizontal" name='editAd' id="edit-ad" >
+  <div class='row'>
+   <div class='row'>
+    <div class='col-lg-12'>
+      <div class="panel panel-success">
+        <div class='panel-body'>
+         <form class="form-horizontal" name='editform' id="edit-ad" >
           <fieldset>
-            <div class='panel-heading centered'><legend>{{adForEdit.title}}Edit Ad</legend></div>
-            <div class='row '>
+            <div class='panel-heading centered'>
+              <legend>{{adForEdit.title}}Edit Ad
+              </legend>
+            </div>
+            <div class='row'>
               <div class='col-lg-8'>
-               <div class="form-group">
-                <label for="title" class="col-lg-2 control-label">Title:</label>
-                <div class="col-lg-10">
-                  <input type="text" id="title"  data-ng-model="adForEdit.title" class="form-control " autofocus="true" name='title' ng-minlength="4" ng-maxlength="50" ng-required="true" required>
-                  <span class="help-block">required*</span>
-                  <div class="errors" ng-class="{ active: editAd.title.$invalid && editAd.title.$dirty }">
-                    <div class="error ng-hide" ng-show="editAd.title.$error.minlength">
-                      <p>Min Title lenght is 4.</p>
-                    </div>
-                    <div class="error ng-hide" ng-show="editAd.title.$error.maxlength">
-                      <p>Max Title length is 50, please shorten it.</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="text" class="col-lg-2 control-label">Text:</label>
-                <div class="col-lg-10">
-                  <textarea type="password" rows='6' id="text" data-ng-model="adForEdit.text" class="form-control " name'adText' placeholder="text" name='adText' ng-minlength='10' ng-maxlength='285' ng-required="true"></textarea>
-                  <span class="help-block">Description about the ad
-required*</span>
-                  <div class="errors" ng-class="{ active: editAd.adText.$invalid && editAd.adText.$dirty }" required>
-                    <div class="error ng-hide" ng-show="editAd.adText.$error.minlength">
-                      <p>Min Text lenght  is 10.</p>
-                    </div>
-                    <div class="error ng-hide" ng-show="editAd.adText.$error.maxlength">
-                      <p>Max Text length is 285, please shorten it.</p>
+                <div class="form-group">
+                  <label for="title" class="col-lg-2 control-label">Title:</label>
+                  <div class="col-lg-10">
+                    <input type="text" id="title"  data-ng-model="adForEdit.title" class="form-control "  name='title' ng-minlength="4" ng-maxlength="50" ng-required="true">
+                    <span class="help-block">required*</span>
+                    <div class="errors" ng-class="{ active: editform.title.$invalid && editform.title.$dirty }">
+                      <div class="error ng-hide" ng-show="editform.title.$error.minlength">
+                        <p>Min Title lenght is 4.</p>
+                      </div>
+                      <div class="error ng-hide" ng-show="editform.title.$error.maxlength">
+                        <p>Max Title length is 50, please shorten it.</p>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-              <div class="form-group">
-                <label for="image" class="col-lg-2 control-label">Image:</label>
-                <div class="col-lg-8">
-                  <div id='filepath' class='well' type='text'></div>
-                  <input type="file"  data-ng-model="imageDataUrl" class="form-control input-sm" accept="image/*" id='imageInfo' app-filereader>
+                <div class="form-group">
+                  <label for="text" class="col-lg-2 control-label">Text:</label>
+                  <div class="col-lg-10">
+                    <textarea rows='6' id="text" data-ng-model="adForEdit.text" class="form-control " name'adText' placeholder="text" name='adText' ng-minlength='10' ng-maxlength='285' ng-required="true"></textarea>
+                    <span class="help-block">Description about the ad
+                      required*</span>
+                      <div class="errors" ng-class="{ active: editform.adText.$invalid && editform.adText.$dirty }" required>
+                        <div class="error ng-hide" ng-show="editform.adText.$error.minlength">
+                          <p>Min Text lenght  is 10.</p>
+                        </div>
+                        <div class="error ng-hide" ng-show="editform.adText.$error.maxlength">
+                          <p>Max Text length is 285, please shorten it.</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-                <div class='col-lg4'>
-                  <button type="submit"  id='filebutton' href="" class="btn btn-primary" data-ng-click="">Browse</button>
+                <div class='col-lg-4'>
+                 <div class='col-lg-4 publish-ad-imate-container'>
+                  <img id="thumbnil"  src="{{imageDataUrl | searchResultImg}}" alt=""/>
                 </div>
               </div>
-
+              <div class='col-lg-12'>
+                <!-- Neste form start -->
+               <ng-form name='imageform' isolate-form>
+               <div class='col-lg-8'>
+                <div class="form-group">
+                  <label for="image" class="col-lg-2 control-label">Image:</label>
+                  <div class="col-lg-8">
+                    <div id='filename' class='well' ></div>
+                    <!-- <input type="file"  data-ng-model="adForEdit.imageDataUrl" class="form-control input-sm" accept="image/*" id='imageInfo' app-filereader> -->
+                    <input type="file" id="imageInfo" accept="image/*" class="form-control input-sm"
+                     onchange="angular.element(this).scope().fileSelected(this)" />
+                  </div>
+                  <div class='col-lg4'>
+                    <button type="submit"  id='filebutton' href="" class="btn btn-primary" data-ng-click="">Browse</button>
+                  </div>
+                </div>
+              </div>
+              <div class='col-lg-4'>
+                <div class='form-group'>
+                  <div ><a class='btn btn-primary   button-size' type='submit' href=""  data-ng-click="changeImage(imageDataUrl,imageform)" >Change  Image</a></div>
+                  <div><a class='btn btn-primary  button-size' data-ng-click="deleteImage()"href="" >Delete  Image</a></div>
+                </div>
+              </div>
+            </ng-form>
+            <!-- Neste form End -->
+          </div>
+          <div class='col-lg-12'>
+            <div class='col-lg-8'>
               <div class='form-group' data-ng-controller="TownsController">
                 <label for="inputEmail" class="col-lg-2 control-label">Town:</label>
                 <div class='col-lg-10'>
@@ -60,7 +88,11 @@ required*</span>
                  </select>
                </div>
              </div>
-             <div class='form-group' data-ng-controller="CategoriesController">
+           </div>
+         </div>
+         <div class='col-lg-12'>
+           <div class='col-lg-8'>
+            <div class='form-group' data-ng-controller="CategoriesController">
               <label for="inputEmail" class="col-lg-2 control-label">Category:</label>
               <div class='col-lg-10'>
                 <select  class='form-control' name="categoryId"  ng-model="adForEdit.categoryId">
@@ -69,29 +101,27 @@ required*</span>
                 </select>
               </div>
             </div>
-
-          </div>
-          <div class='col-lg-4 publish-ad-imate-container'>
-            <img id="thumbnil"  src="{{imageDataUrl | searchResultImg}}" alt=""/>
-            <div>200x200</div>
-            <a href="" >Change  Image</a>
-            <a href="" >Delete  Image</a>
           </div>
         </div>
-        <div class="form-group">
+      </div>
+      <div class="form-group">
           <div class="col-lg-10 col-lg-offset-2">
 
-            <a type="submit" href="" class="btn btn-primary btn-lg col-lg-offset-2" data-ng-click="createNewAd(adForEdit,editAd)"ng-class="{ 'btn-primary': editAd.$valid && editAd.$dirty, 'btn-success': redirect }"
-        ng-disabled="editAd.$invalid || editAd.$pristine || xhr || redirect">EDIT</a>
+            <a type="submit" href="" class="btn btn-primary btn-lg col-lg-offset-2" data-ng-click="editAdFunction(adForEdit,editform)"ng-class="{ 'btn-primary': editform.$valid && editform.$dirty, 'btn-success': redirect }"
+        ng-disabled="editform.$invalid || xhr || redirect">Edit</a>
 
             <a href="#/user/ads" class="col-lg-offset-1 btn btn-default btn-lg">Cancel</a>
           </div>
         </div>
-      </fieldset>
-    </form>
-  </div>
+    </fieldset>
+  </form>
+</div>
+</div>
+</div>
 </div>
 </div>
 </div>
 
 <script type="text/javascript" src='js/picturePreview.js'></script>
+
+

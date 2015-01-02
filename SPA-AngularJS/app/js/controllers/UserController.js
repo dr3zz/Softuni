@@ -18,15 +18,22 @@ softUniApp.controller('UserController', function($scope, $filter, $window, $root
 		status: null
 	};
 	
-	$scope.deactivateAdStauts = function(id) {
-		userData.deactivateUserAd(id).then(function(data) {
+	$scope.deactivateAdStauts = function(ad) {
+		userData.deactivateUserAd(ad).then(function(data) {
 				$scope.getAds($scope.adsRequestParams);
 			},
 			function(err) {
 				console.log(err);
 			});
 	};
-
+	$scope.publishAdAgain = function (ad) {
+		userData.publishUserAdAgain(ad).then(function (data) {
+			$scope.getAds($scope.adsRequestParams);
+		},
+		function (err) {
+			console.log(err);
+		})
+	}
 	$scope.loadDeleteAdPage = function(ad) {
 		$window.location.href = '#/user/ads/delete/' + ad.id;
 		userData.getAdById(ad.id).then(function(data) {

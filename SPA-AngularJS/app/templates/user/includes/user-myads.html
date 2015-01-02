@@ -46,14 +46,14 @@
 				<div class='form-control'>{{ad.status}}
 				</div>
 				<div ng-switch="ad.status">
-					<div ng-switch-when="Published"> <a type="submit" href="" class="btn btn-primary" data-ng-click="deactivateAdStauts(ad.id)">Deactivate</a>
+					<div ng-switch-when="Published"> <a type="submit" href="" class="btn btn-primary" data-ng-click="deactivateAdStauts(ad)">Deactivate</a>
 					</div>
-					<div ng-switch-when="WaitingApproval" ><a type="submit" href="" class="btn btn-primary" data-ng-click="deactivateAdStauts(ad.id)">Deactivate</a>
+					<div ng-switch-when="WaitingApproval" ><a type="submit" href="" class="btn btn-primary" data-ng-click="deactivateAdStauts(ad)">Deactivate</a>
 					</div>
 					<div ng-switch-when="Inactive">
 						<div class='form-group'><a type="submit" href="" class="btn btn-primary" data-ng-click="loadEditAdPage(ad)">Edit</a>
 						</div>
-						<div class='form-group'><a type="submit" href="" class="btn btn-primary" data-ng-click="publishAdAgain(ad.id)">Publish Again</a>
+						<div class='form-group'><a type="submit" href="" class="btn btn-primary" data-ng-click="publishAdAgain(ad)">Publish Again</a>
 						</div>
 						<div class='form-group'><a type="submit" data-ng-click="loadDeleteAdPage(ad)" class="btn btn-primary" data->Delete</a>
 						</div>

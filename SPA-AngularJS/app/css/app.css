@@ -20,3 +20,7 @@
 .error {
 	color: red;
 }
+.button-size {
+	margin: 2% !important;
+	width: 95% !important;
+}
