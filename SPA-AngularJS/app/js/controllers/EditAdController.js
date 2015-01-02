@@ -35,14 +35,18 @@ softUniApp.controller('EditAdController', function($scope, userData, $q, messagi
 		});
 	};
 	$scope.deleteImage = function () {
-		$scope.adForEdit.imageDataUrl = null;
-
+		$scope.adForEdit.imageDataUrl = undefined;
+		$scope.imageDataUrl = undefined;
+		$scope.adForEdit.changeimage = true;
 		userData.service.updateAdForEdit($scope.adForEdit);
-		delete $scope.imageDataUrl;
+	
 	};
 	$scope.editAdFunction = function () {
 		userData.editUserAd($scope.adForEdit).then(function (data) {
 			console.log("ad edited");
+			console.log($scope.adForEdit);
+			delete $scope.adForEdit.changeimage;
+
 			$window.location.href = "/#user/ads"
 		},function (err) {
 			console.log(err);
