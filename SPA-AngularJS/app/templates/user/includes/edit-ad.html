@@ -1,4 +1,97 @@
 edit user add
-<div data-ng-controller="EditAdController">
-	{{adForEdit.id}}
+
+<div class='container '>
+	<div class='col-md-12' >
+			<div class="panel panel-success">
+				<div class='panel-body'>
+         <form class="form-horizontal" name='editAd' id="edit-ad" >
+          <fieldset>
+            <div class='panel-heading centered'><legend>{{adForEdit.title}}Edit Ad</legend></div>
+            <div class='row '>
+              <div class='col-lg-8'>
+               <div class="form-group">
+                <label for="title" class="col-lg-2 control-label">Title:</label>
+                <div class="col-lg-10">
+                  <input type="text" id="title"  data-ng-model="adForEdit.title" class="form-control " autofocus="true" name='title' ng-minlength="4" ng-maxlength="50" ng-required="true" required>
+                  <span class="help-block">required*</span>
+                  <div class="errors" ng-class="{ active: editAd.title.$invalid && editAd.title.$dirty }">
+                    <div class="error ng-hide" ng-show="editAd.title.$error.minlength">
+                      <p>Min Title lenght is 4.</p>
+                    </div>
+                    <div class="error ng-hide" ng-show="editAd.title.$error.maxlength">
+                      <p>Max Title length is 50, please shorten it.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="text" class="col-lg-2 control-label">Text:</label>
+                <div class="col-lg-10">
+                  <textarea type="password" rows='6' id="text" data-ng-model="adForEdit.text" class="form-control " name'adText' placeholder="text" name='adText' ng-minlength='10' ng-maxlength='285' ng-required="true"></textarea>
+                  <span class="help-block">Description about the ad
+required*</span>
+                  <div class="errors" ng-class="{ active: editAd.adText.$invalid && editAd.adText.$dirty }" required>
+                    <div class="error ng-hide" ng-show="editAd.adText.$error.minlength">
+                      <p>Min Text lenght  is 10.</p>
+                    </div>
+                    <div class="error ng-hide" ng-show="editAd.adText.$error.maxlength">
+                      <p>Max Text length is 285, please shorten it.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="image" class="col-lg-2 control-label">Image:</label>
+                <div class="col-lg-8">
+                  <div id='filepath' class='well' type='text'></div>
+                  <input type="file"  data-ng-model="imageDataUrl" class="form-control input-sm" accept="image/*" id='imageInfo' app-filereader>
+                </div>
+                <div class='col-lg4'>
+                  <button type="submit"  id='filebutton' href="" class="btn btn-primary" data-ng-click="">Browse</button>
+                </div>
+              </div>
+
+              <div class='form-group' data-ng-controller="TownsController">
+                <label for="inputEmail" class="col-lg-2 control-label">Town:</label>
+                <div class='col-lg-10'>
+                  <select  class='form-control' name="townId"  ng-model="adForEdit.townId">
+                   <option data-ng-selected='town.id == adForEdit.townId' data-ng-repeat="town in towns">{{town.name}}</option>
+                   <option value='' selected>Other</option>
+                 </select>
+               </div>
+             </div>
+             <div class='form-group' data-ng-controller="CategoriesController">
+              <label for="inputEmail" class="col-lg-2 control-label">Category:</label>
+              <div class='col-lg-10'>
+                <select  class='form-control' name="categoryId"  ng-model="adForEdit.categoryId">
+                  <option value=''>No Category</option>
+                  <option data-ng-selected='adForEdit.categoryId == category.id' data-ng-repeat="category in categories">{{category.name}}</option>
+                </select>
+              </div>
+            </div>
+
+          </div>
+          <div class='col-lg-4 publish-ad-imate-container'>
+            <img id="thumbnil"  src="{{imageDataUrl | searchResultImg}}" alt=""/>
+            <div>200x200</div>
+            <a href="" >Change  Image</a>
+            <a href="" >Delete  Image</a>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-lg-10 col-lg-offset-2">
+
+            <a type="submit" href="" class="btn btn-primary btn-lg col-lg-offset-2" data-ng-click="createNewAd(adForEdit,editAd)"ng-class="{ 'btn-primary': editAd.$valid && editAd.$dirty, 'btn-success': redirect }"
+        ng-disabled="editAd.$invalid || editAd.$pristine || xhr || redirect">EDIT</a>
+
+            <a href="#/user/ads" class="col-lg-offset-1 btn btn-default btn-lg">Cancel</a>
+          </div>
+        </div>
+      </fieldset>
+    </form>
+  </div>
 </div>
+</div>
+</div>
+
+<script type="text/javascript" src='js/picturePreview.js'></script>

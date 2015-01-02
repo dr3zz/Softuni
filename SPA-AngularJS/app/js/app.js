@@ -70,7 +70,7 @@ var softUniApp = angular.module('softUniApp', ['ngResource', 'ngRoute'])
 			data: {
 				requireLogin: true
 			},
-
+			controller : 'EditAdController'
 
 		});
 		$routeProvider.when('/user/ads/delete/:id', {
@@ -79,6 +79,7 @@ var softUniApp = angular.module('softUniApp', ['ngResource', 'ngRoute'])
 			data: {
 				requireLogin: true
 			},
+			controller : 'DeleteAdController'
 		
 
 
