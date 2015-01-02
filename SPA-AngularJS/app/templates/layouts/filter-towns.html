@@ -1,4 +1,4 @@
-<div class="panel panel-success" data-ng-controller="TownsController">
+<!-- <div class="panel panel-success" data-ng-controller="TownsController">
 		<div class="panel-heading">
 			<h3 class="panel-title">Panel primary</h3>
 		</div>
@@ -9,5 +9,20 @@
 			<p class="bs-component" data-ng-repeat="town in towns">
 				<a href="" data-ng-click="selectedTown(town.id)" class="btn btn-primary" data-ng-class="{'active': town.id == activeTown}" >{{town.name}} {{town.id}}</a>
 			</p>
+		</div>
+	</div> -->
+
+
+	<div class="panel panel-success" data-ng-controller="TownsController">
+		<div class="panel-heading">
+			<h3 class="panel-title centered">Towns</h3>
+		</div>
+		<div class="panel-body" >
+			<ul class="nav nav-pills nav-stacked">
+				<li data-ng-class="{'active': 'all' == activeTown}"><a href="" data-ng-click="selectedTown()"   >All towns</a></li>
+			</ul>
+			<ul class="nav nav-pills nav-stacked" data-ng-repeat="town in towns">
+				<li data-ng-class="{'active': town.id == activeTown}" ><a href="" data-ng-click="selectedTown(town.id)"  >{{town.name}} {{town.id}}</a></li>
+			</ul>
 		</div>
 	</div>

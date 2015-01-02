@@ -24,14 +24,11 @@ softUniApp.factory('Auth', function($http, $q, $window) {
             var loggedUser = getLocalUser();
             if (loggedUser) {
                 var head = {};
-
                 head['Authorization'] = 'Bearer ' + loggedUser.sessionToken;
-
                 setAuthorizationHeaders(head);
             } else {
                 var head = {};
                 setAuthorizationHeaders(head);
-                console.log("az sum");
             }
             return headers;
         },
@@ -42,13 +39,7 @@ softUniApp.factory('Auth', function($http, $q, $window) {
             return !!sessionUser;
 
         },
-        // isAuthorized: function isAuthorized(authorizedRoles) {
-        //     if (!angular.isArray(authorizedRoles)) {
-        //         authorizedRoles = [authorizedRoles];
-        //     }
-        //     return (authService.isAuthenticated() &&
-        //         authorizedRoles.indexOf(Session.userRole) !== -1);
-        // },
+    
         getLoggedUser: function getLoggedUser() {
             return JSON.parse($window.sessionStorage.getItem('UserData'));
         },

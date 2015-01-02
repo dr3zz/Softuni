@@ -1,4 +1,4 @@
-<div class="panel panel-success" data-ng-controller="CategoriesController">
+<!-- <div class="panel panel-success" data-ng-controller="CategoriesController">
         <div class="panel-heading">
             <h3 class="panel-title">Panel primary</h3>
         </div>
@@ -10,4 +10,20 @@
                 <a href="" data-ng-click="selectedCategory(category.id)" class="btn btn-primary" data-ng-class="{active: category.id == activeCategory}" >{{category.name}} {{category.id}}</a>
             </p>
         </div>
+    </div> -->
+
+    <div class="panel panel-success" data-ng-controller="CategoriesController">
+        <div class="panel-heading">
+            <h3 class="panel-title centered">Categories</h3>
+        </div>
+        <div class="panel-body" >
+            <ul class="nav nav-pills nav-stacked">
+                <li data-ng-class="{'active': 'all' == activeCategory}"><a href="" data-ng-click="selectedCategory()"   >All towns</a></li>
+            </ul>
+            <ul class="nav nav-pills nav-stacked" data-ng-repeat="category in categories">
+                <li data-ng-class="{'active': category.id == activeCategory}" ><a href="" data-ng-click="selectedCategory(category.id)"  >{{category.name}} {{category.id}}</a></li>
+            </ul>
+        </div>
     </div>
+
+    
