@@ -47,8 +47,11 @@ softUniApp.factory('Auth', function($http, $q, $window) {
             if (!!user) {
                 var sessionUser = {
                     username: user.username,
-                    sessionToken: user.access_token
+                    sessionToken: user.access_token,
+                   
                 };
+                console.log(user);
+                // console.log(message);
                 $window.sessionStorage.setItem('UserData', JSON.stringify(sessionUser));
             }
         },

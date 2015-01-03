@@ -1,4 +1,4 @@
-softUniApp.controller('LoginController', function($scope, $window, Auth, mainData, messaging) {
+softUniApp.controller('LoginController', function($scope, $http, $window, Auth, mainData, messaging) {
     $scope.register = registerUser;
     $scope.login = loginUser;
     $scope.userData = Auth;
@@ -65,7 +65,7 @@ softUniApp.controller('LoginController', function($scope, $window, Auth, mainDat
         Auth.logout(headers).then(function(data) {
             Auth.removeAuthorizationHeaders();
             Auth.setLoggedUser(undefined);
-            messaging.successMessage(data.message)
+            messaging.successMessage(data.message);
             $window.location.href = '#/';
         }, function(err) {
             messaging.errorMessage(err.message);

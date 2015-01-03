@@ -52,7 +52,7 @@ var softUniApp = angular.module('softUniApp', ['ngResource', 'ngRoute'])
 			data: {
 				requireLogin: true
 			},
-			controller: 'UserController'
+			controller: 'EditUserProfileController'
 
 		});
 		$routeProvider.when('/user/ads', {

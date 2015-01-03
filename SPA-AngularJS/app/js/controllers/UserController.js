@@ -1,5 +1,5 @@
-softUniApp.controller('UserController', function($scope, $filter, $window, $rootScope, messaging, Auth, userData, pageSize) {
-
+softUniApp.controller('UserController', function($scope, $window,messaging, Auth, userData, pageSize) {
+	
 	$scope.getAds = function(requestParams) {
 		userData.getAllUserAds(requestParams).then(function(data) {
 				$scope.userAds = data.ads;
@@ -32,7 +32,7 @@ softUniApp.controller('UserController', function($scope, $filter, $window, $root
 		},
 		function (err) {
 			console.log(err);
-		})
+		});
 	}
 	$scope.loadDeleteAdPage = function(ad) {
 		$window.location.href = '#/user/ads/delete/' + ad.id;

@@ -11,12 +11,10 @@
 					{{ad.date | date:'dd-MMM-yyyy'}}
 				</span>
 			</div>
-			
 		</div>
 		<div class='row'>
 			<div class='col-md-4 image-container'>
-				<img src="" data-ng-src="{{ad.imageDataUrl}}">
-				<img src="" alt="" data-ng-if="!ad.imageDataUrl" data-ng-src="imgs/no-image.jpg"/>
+				<img src="" data-ng-src="{{ad.imageDataUrl | searchResultImg}}">
 			</div>
 			<div class='col-md-8'>
 				<div class='well'>
@@ -27,41 +25,37 @@
 						Name 
 					</div>
 					<div class='col-md-10 '>
-						<div class='form-control'>{{ad.ownerName}}</div></div>
-						<div class='col-md-2'>
-							Email: 
+						<div class='form-control'>{{ad.ownerName}}
 						</div>
-						<div class='col-md-10'>
-							<div class='form-control'>{{ad.ownerPhone}}</div></div>
-							<div class='col-md-2'>
-								Tel. 
-							</div>
-							<div class='col-md-10 '>
-								<div class='form-control'>{{ad.ownerEmail}}</div></div>
-								<div class='col-md-2'>
-									CatId. 
-								</div>
-								<div class='col-md-10 '>
-									<div class='form-control'>{{ad.categoryId}}</div></div>
-									<div class='col-md-2'>
-										TownId. 
-									</div>
-									<div class='col-md-10 '>
-										<div class='form-control'>{{ad.townId}}</div></div>
-									</div>
-
-									<div class='row'>
-										<div class='col-md-2'>
-
-										</div>
-										<div class='col-md-10'></div>
-									</div>
-								</div>
-							</div>
+					</div>
+					<div class='col-md-2'>
+						Email: 
+					</div>
+					<div class='col-md-10'>
+						<div class='form-control'>{{ad.ownerPhone}}
 						</div>
+					</div>
+					<div class='col-md-2'>
+						Tel. 
+					</div>
+					<div class='col-md-10 '>
+						<div class='form-control'>{{ad.ownerEmail}}
+						</div>
+					</div>
+				</div>
+				<div class='row'>
+					<div class='col-md-2'>
 
 					</div>
+					<div class='col-md-10'></div>
+				</div>
+			</div>
+		</div>
+	</div>
 
-					<div class='center-block'>
-						<div ng-if='numPages > 1' filtercontroller pagination></div>
-					</div>
+</div>
+
+<div class='center-block'>
+	<div ng-if='numPages > 1' filtercontroller pagination>
+	</div>
+</div>

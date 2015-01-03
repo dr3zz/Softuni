@@ -16,8 +16,7 @@
 			</div>
 			<div class='row'>
 				<div class='col-md-4 image-container'>
-					<img src="" data-ng-src="{{adForDelete.imageDataUrl}}">
-					<img src="" alt="" data-ng-if="!adForDelete.imageDataUrl" data-ng-src="imgs/no-image.jpg"/>
+					<img src="" data-ng-src="{{adForDelete.imageDataUrl | searchResultImg}}">
 				</div>
 				<div class='col-md-8'>
 					<div class='well'>
