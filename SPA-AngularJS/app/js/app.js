@@ -70,7 +70,7 @@ var softUniApp = angular.module('softUniApp', ['ngResource', 'ngRoute'])
 			data: {
 				requireLogin: true
 			},
-			controller : 'EditAdController'
+			controller: 'EditAdController'
 
 		});
 		$routeProvider.when('/user/ads/delete/:id', {
@@ -79,8 +79,8 @@ var softUniApp = angular.module('softUniApp', ['ngResource', 'ngRoute'])
 			data: {
 				requireLogin: true
 			},
-			controller : 'DeleteAdController'
-		
+			controller: 'DeleteAdController'
+
 
 
 		});
@@ -98,20 +98,20 @@ var softUniApp = angular.module('softUniApp', ['ngResource', 'ngRoute'])
 			}
 		};
 		$rootScope.$on('$routeChangeSuccess', function(event, current, previous) {
+
 			$rootScope.page.setTitle(current.$$route.title || 'Default Title');
 
 		});
 		$rootScope.$on('$routeChangeStart', function(event, next) {
+			if (next.data) {
+				if (!Auth.isLoggedUser() && next.data.requireLogin) {
+					$location.path('/');
 
-			if (!Auth.isLoggedUser() && next.data.requireLogin) {
-				$location.path('/');
-
-			} else if (Auth.isLoggedUser() && !next.data.requireLogin) {
-				console.log('already logged');
-
-				$location.path('/user/home');
+				} else if (Auth.isLoggedUser() && !next.data.requireLogin) {
+					
+					$location.path('/user/home');
+				}
 			}
-			
 		});
 	})
 	.constant('baseUrl', 'http://localhost:1337/api/')

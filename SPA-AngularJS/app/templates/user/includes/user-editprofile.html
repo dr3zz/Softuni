@@ -1,7 +1,83 @@
 <div class='container'>
 	<div class='row'>
 		<div class='col-lg-12'>
-			USER HERE
+			<div class='panel panel-success'>
+				<div class='panel-body'>
+					<form class='form-horizontal' name='editprofile'>
+						<fieldset>
+							<div class='panel-heading centered'>
+								<legend>Edit Profile</legend>
+							</div>
+							<div class='form-group'>
+								<div class='col-lg-12'>
+									<label class=' control-label' for='name'>Name:</label>
+									<div class='form-input'>
+										<input type='text' id='name' data-ng-model='userProfile.name' class='form-control' name='name' ng-minlength="4" ng-maxlength="32" ng-required="true">
+										<div class="errors" ng-class="{ active: editprofile.name.$invalid }">
+											<div class="error ng-hide" ng-show="editprofile.name.$error.minlength">
+												<p>Provided name is too short!</p>
+											</div>
+											<div class="error ng-hide" ng-show="editprofile.name.$error.maxlength">
+												<p>Max name length is 32, please shorten it.</p>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class='form-group'>
+								<div class='col-lg-12'>
+									<label class='control-label' for='email'>Email:</label>
+									<input type='text' data-ng-pattern="emailPattern" id='email' data-ng-model='userProfile.email'  class='form-control' name='email' ng-required="true" remote-validated="used">
+									<div class="errors" ng-class="{ active: editprofile.email.$invalid }">
+										<div class="error ng-hide" ng-show="editprofile.email.$error.pattern">
+											<p>E-Mail seems invalid.</p>
+										</div>
+										<div class="error ng-hide" ng-show="editprofile.email.$error.used">
+											<p>E-Mail is already taken.</p>
+										</div>
+									</div>
+								</div>
+							</div>
+							
+							<div class='form-group'>
+								<div class='col-lg-12'>
+									<label class='control-label'   for='phone'>Phone:</label>
+									<input type='text' id='phone' data-ng-pattern="" data-ng-model='userProfile.phoneNumber' class='form-control' name='phone' 
+									  ng-required="true">
+									<div class="errors" ng-class="{ active: editprofile.phone.$invalid }" >
+										<div class="error ng-hide" ng-show="editprofile.phone.$error.pattern">
+											<p>Phone seems invalid.</p>
+											<p>Format must be +359 888 888888 or 888 888888</p>
+										</div>
+
+									</div>
+								</div>
+							</div>
+							<div class='form-group'>
+								<div class='col-lg-12'>
+									<label for="towns" class="control-label">Town:</label>
+									<div  data-ng-controller="TownsController">
+										<select  class='form-control' id='towns' name="town" data-ng-model='userProfile.townId' >
+											<option data-ng-selected='town.id == userProfile.townId' data-ng-repeat="town in towns">{{town.name}}</option>
+											<option value='' >Other</option>
+										</select>
+									</div>
+								</div>
+							</div>
+							<div class='form-group'>
+								<div class='col-lg-6'>
+									<a type="submit" class="btn btn-primary button-size" data-ng-click="register(userProfile,editprofile)" ng-class="{ 'btn-primary': editprofile.$valids, 'btn-success': redirect }"
+									ng-disabled="editprofile.$invalid || xhr || redirect">Edit</a>
+								</div>
+								<div class='col-lg-6'>
+									<a href='#/user/ads' class="btn btn-primary button-size">Cancel</a>
+								</div>
+							</div>
+
+						</fieldset>
+					</form>
+				</div>
+			</div>
 		</div>
 		
 	</div>
