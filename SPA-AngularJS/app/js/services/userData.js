@@ -3,20 +3,21 @@ softUniApp.factory('userData', function($http, $q, baseUrl, Auth, $rootScope) {
 	var service = {};
 	service.adForDelete = {};
 	service.adForEdit = {};
-	
+	service.userPassword = {};
+
 	service.updateAdForDelete = function(value) {
 		this.adForDelete = value;
 		$rootScope.$broadcast('valueUpdated');
 	};
-
+	service.updateUserPassword = function(value) {
+		this.userPassword = value;
+		$rootScope.$broadcast('valueUpdated');
+	};
 	service.updateAdForEdit = function(value) {
 		this.adForEdit = value;
 		$rootScope.$broadcast('valueUpdated');
 	};
 	var headers = Auth.getAuthorizationHeaders();
-	// function getHeaders() {
-	// 	$http.defaults.headers.common['Authorization'] = Auth.getAuthorizationHeaders().Authorization;
-	// }
 
 	function publishUserAdAgain(data) {
 		var d = $q.defer();
@@ -24,7 +25,7 @@ softUniApp.factory('userData', function($http, $q, baseUrl, Auth, $rootScope) {
 		$http({
 				method: 'PUT',
 				url: url,
-				data : data,
+				data: data,
 				headers: headers,
 			})
 			.success(function(data, status, headers, config) {
@@ -35,25 +36,27 @@ softUniApp.factory('userData', function($http, $q, baseUrl, Auth, $rootScope) {
 			});
 		return d.promise;
 	}
-	function editUserAd (data) {
+
+	function editUserAd(data) {
 		var d = $q.defer();
 		var url = userBaseUrl + 'ads/' + data.id;
 		$http({
-			method: 'PUT',
-			url:url,
-			data: data,
-			headers: headers,
-		})
-		.success(function (data,status,headers,config) {
-			d.resolve(data);
-		})
-		.error(function (data,status,headers,config) {
-			d.reject(data);
-		});
+				method: 'PUT',
+				url: url,
+				data: data,
+				headers: headers,
+			})
+			.success(function(data, status, headers, config) {
+				d.resolve(data);
+			})
+			.error(function(data, status, headers, config) {
+				d.reject(data);
+			});
 		return d.promise;
 	}
+
 	function createNewAd(data) {
-		
+
 		var d = $q.defer();
 		var url = userBaseUrl + 'ads/';
 		$http({
@@ -94,7 +97,7 @@ softUniApp.factory('userData', function($http, $q, baseUrl, Auth, $rootScope) {
 		$http({
 				method: 'PUT',
 				url: url,
-				data:data,
+				data: data,
 				headers: headers,
 			})
 			.success(function(data, status, headers, config) {
@@ -140,20 +143,39 @@ softUniApp.factory('userData', function($http, $q, baseUrl, Auth, $rootScope) {
 
 		return d.promise;
 	}
+
 	function getUserProfile() {
 		var d = $q.defer();
 		var url = userBaseUrl + 'profile/';
 		$http({
-			method: 'GET',
-			url: url,
-			headers: headers
-		})
-		.success(function (data,status,headers,config) {
-			d.resolve(data);
-		})
-		.error(function (data,status,headers,config) {
-			d.reject(data);
-		})
+				method: 'GET',
+				url: url,
+				headers: headers
+			})
+			.success(function(data, status, headers, config) {
+				d.resolve(data);
+			})
+			.error(function(data, status, headers, config) {
+				d.reject(data);
+			});
+		return d.promise;
+	}
+
+	function editUserProfile(user) {
+		var d = $q.defer();
+		var url = userBaseUrl + 'profile/';
+		$http({
+				method: 'PUT',
+				url: url,
+				headers: headers,
+				data: user
+			})
+			.success(function(data, status, headers, config) {
+				d.resolve(data);
+			})
+			.error(function(data, status, headers,config) {
+				d.reject(data);
+			});
 		return d.promise;
 	}
 
@@ -165,8 +187,9 @@ softUniApp.factory('userData', function($http, $q, baseUrl, Auth, $rootScope) {
 		deleteUserAd: deleteUserAd,
 		createNewAd: createNewAd,
 		getAdById: getAdById,
-		editUserAd : editUserAd,
+		editUserAd: editUserAd,
 		getUserProfile: getUserProfile,
+		editUserProfile : editUserProfile,
 		service: service,
 
 

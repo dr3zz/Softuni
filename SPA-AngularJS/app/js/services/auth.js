@@ -50,7 +50,7 @@ softUniApp.factory('Auth', function($http, $q, $window) {
                     sessionToken: user.access_token,
                    
                 };
-                console.log(user);
+                // console.log(user);
                 // console.log(message);
                 $window.sessionStorage.setItem('UserData', JSON.stringify(sessionUser));
             }
