@@ -43,15 +43,24 @@ softUniApp.controller('EditAdController', function($scope, userData, $q, messagi
 	};
 	$scope.editAdFunction = function () {
 		userData.editUserAd($scope.adForEdit).then(function (data) {
-			console.log("ad edited");
-			console.log($scope.adForEdit);
-			delete $scope.adForEdit.changeimage;
-
-			$window.location.href = "/#user/ads"
+			$scope.adForEdit = {};
+			userData.service.updateAdForEdit($scope.adForEdit);
+			$window.location.href = "/#user/ads";
+			messaging.successMessage(data.message);
+		
 		},function (err) {
-			console.log(err);
-		})
-	}
+			if(err.modelState) {
+				var error = err.modelState;
+				if(error['model.Text']) {
+					messaging.errorMessage(error['model.Text'][0]);
+				}
+				if(error['model.Title']) {
+					messaging.errorMessage((error['model.Title'][0]));
+				}
+			}
+			
+		});
+	};
 	function readFile(file) {
 		var deferred = $q.defer();
 
@@ -65,6 +74,15 @@ softUniApp.controller('EditAdController', function($scope, userData, $q, messagi
 		reader.readAsDataURL(file);
 
 		return deferred.promise;
+	}
+	$scope.removeEditAd = function () {
+		$scope.adForEdit = {};
+		userData.service.updateAdForEdit($scope.adForEdit);
+		$window.location.href = '#/user/ads';
+
+	}
+	if(!$scope.adForEdit.id) {
+		$window.location.href = '#/user/ads';
 	}
 
 });

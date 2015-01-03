@@ -104,10 +104,11 @@
       <div class="form-group">
           <div class="col-lg-10 col-lg-offset-2">
 
-            <a type="submit" href="" class="btn btn-primary btn-lg col-lg-offset-2" data-ng-click="editAdFunction(adForEdit,editform)"ng-class="{ 'btn-primary': editform.$valid && editform.$dirty, 'btn-success': redirect }"
-        ng-disabled="editform.$invalid || xhr || redirect">Edit</a>
+     <!--        <a type="submit" href="" class="btn btn-primary btn-lg col-lg-offset-2" data-ng-click="editAdFunction(adForEdit,editform)" ng-class="{ 'btn-primary': editform.$valid && editform.$dirty, 'btn-success': redirect }"
+        ng-disabled="editform.$invalid || xhr || redirect">Edit</a> -->
+         <a type="submit" href="" class="btn btn-primary btn-lg col-lg-offset-2" data-ng-click="editAdFunction(adForEdit,editform)" >Edit</a>
 
-            <a href="#/user/ads" class="col-lg-offset-1 btn btn-default btn-lg">Cancel</a>
+            <a  data-ng-click="removeEditAd()"class="col-lg-offset-1 btn btn-default btn-lg">Cancel</a>
           </div>
         </div>
     </fieldset>

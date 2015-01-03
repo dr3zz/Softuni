@@ -91,7 +91,7 @@ var softUniApp = angular.module('softUniApp', ['ngResource', 'ngRoute'])
 		});
 		// $locationProvider.html5Mode(true);
 
-	}).run(function($location, $rootScope, Auth) {
+	}).run(function($location, $rootScope, Auth,userData) {
 		$rootScope.page = {
 			setTitle: function(title) {
 				this.title = title;
@@ -100,6 +100,7 @@ var softUniApp = angular.module('softUniApp', ['ngResource', 'ngRoute'])
 		$rootScope.$on('$routeChangeSuccess', function(event, current, previous) {
 
 			$rootScope.page.setTitle(current.$$route.title || 'Default Title');
+			
 
 		});
 		$rootScope.$on('$routeChangeStart', function(event, next) {
