@@ -80,7 +80,7 @@
                 <label for="inputEmail" class="col-lg-2 control-label">Town:</label>
                 <div class='col-lg-10'>
                   <select  class='form-control' name="townId"  ng-model="adForEdit.townId">
-                   <option data-ng-selected='town.id == adForEdit.townId' data-ng-repeat="town in towns">{{town.name}}</option>
+                   <option value='{{town.id}}' data-ng-selected='town.id == adForEdit.townId' data-ng-repeat="town in towns">{{town.name}}</option>
                    <option value='' selected>Other</option>
                  </select>
                </div>
@@ -94,7 +94,7 @@
               <div class='col-lg-10'>
                 <select  class='form-control' name="categoryId"  ng-model="adForEdit.categoryId">
                   <option value=''>No Category</option>
-                  <option data-ng-selected='adForEdit.categoryId == category.id' data-ng-repeat="category in categories">{{category.name}}</option>
+                  <option value='{{category.id}}' data-ng-selected='adForEdit.categoryId == category.id' data-ng-repeat="category in categories">{{category.name}}</option>
                 </select>
               </div>
             </div>

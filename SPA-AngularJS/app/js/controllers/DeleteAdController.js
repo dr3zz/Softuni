@@ -21,7 +21,7 @@ softUniApp.controller('DeleteAdController', function($scope, $window, userData, 
 		userData.service.updateAdForDelete($scope.adForDelete);
 		$window.location.href = '#/user/ads';
 	};
-	if (!$scope.adForDelete.id) {
-		$window.location.href = '#/user/ads';
-	}
+	// if (!$scope.adForDelete.id) {
+	// 	$window.location.href = '#/user/ads';
+	// }
 });

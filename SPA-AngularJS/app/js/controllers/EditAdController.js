@@ -55,9 +55,16 @@ softUniApp.controller('EditAdController', function($scope, userData, $q, messagi
 					messaging.errorMessage(error['model.Text'][0]);
 				}
 				if(error['model.Title']) {
-					messaging.errorMessage((error['model.Title'][0]));
+					messaging.errorMessage(error['model.Title'][0]);
+				}
+				if(error['model.townId']) {
+					// messaging.errorMessage(error['model.townId'][0]);
+				}
+				if(error['model.categoryId']) {
+					// messaging.errorMessage(error['model.categoryId'][0]);
 				}
 			}
+			console.log(err);
 			
 		});
 	};
@@ -80,9 +87,9 @@ softUniApp.controller('EditAdController', function($scope, userData, $q, messagi
 		userData.service.updateAdForEdit($scope.adForEdit);
 		$window.location.href = '#/user/ads';
 
-	}
-	if(!$scope.adForEdit.id) {
-		$window.location.href = '#/user/ads';
-	}
+	};
+	// if(!$scope.adForEdit.id) {
+	// 	$window.location.href = '#/user/ads';
+	// }
 
 });
