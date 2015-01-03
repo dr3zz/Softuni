@@ -26,14 +26,14 @@
         <div class='col-lg-4'>
           <label for="inputPassword" class="control-label">Password:</label>
           <div class="form-input password">
-            <input type="password" class="form-control password" placeholder="Password" name="password" ng-model="registerObj.password" ng-minlength="4" ng-maxlength="16" ng-required="true"password-match="registerObj.confirmPassword" >
+            <input type="password" class="form-control password" placeholder="Password" name="password" ng-model="registerObj.password" ng-minlength="2" ng-maxlength="20" ng-required="true"password-match="registerObj.confirmPassword" >
 
             <div class="errors" ng-class="{ active: registerForm.password.$invalid && registerForm.password.$dirty }">
               <div class="error ng-hide" ng-show="registerForm.password.$error.minlength">
-                <p>For your own safety, use a password longer than 4 characters.</p>
+                <p>For your own safety, use a password longer than 2 characters.</p>
               </div>
               <div class="error ng-hide" ng-show="registerForm.password.$error.maxlength">
-                <p>For your own <b>SANITY</b>, use a password shorter than 16 characters.</p>
+                <p>For your own <b>SANITY</b>, use a password shorter than 20 characters.</p>
               </div>
             </div>
           </div>

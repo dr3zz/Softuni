@@ -178,6 +178,23 @@ softUniApp.factory('userData', function($http, $q, baseUrl, Auth, $rootScope) {
 			});
 		return d.promise;
 	}
+	function changeUserPassword (password) {
+		var d = $q.defer();
+		var url = userBaseUrl + 'changepassword/';
+		$http({
+			method: 'PUT',
+			url: url,
+			headers:headers,
+			data: password
+		})
+		.success(function (data,status,headers,config) {
+			d.resolve(data);
+		})
+		.error(function (data,status,headers,config) {
+			d.reject(data);
+		});
+		return d.promise;
+	}
 
 
 	return {
@@ -190,6 +207,7 @@ softUniApp.factory('userData', function($http, $q, baseUrl, Auth, $rootScope) {
 		editUserAd: editUserAd,
 		getUserProfile: getUserProfile,
 		editUserProfile : editUserProfile,
+		changeUserPassword : changeUserPassword,
 		service: service,
 
 
