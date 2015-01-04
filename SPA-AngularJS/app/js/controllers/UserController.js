@@ -1,4 +1,4 @@
-softUniApp.controller('UserController', function($scope, $window, messaging, Auth, userData, pageSize) {
+softUniApp.controller('UserController', function($scope,$cookieStore, $window, messaging, Auth, userData, pageSize) {
 
 	$scope.getAds = function(requestParams) {
 		userData.getAllUserAds(requestParams).then(function(data) {
@@ -36,35 +36,14 @@ softUniApp.controller('UserController', function($scope, $window, messaging, Aut
 			});
 	};
 	$scope.loadDeleteAdPage = function(ad) {
-		userData.getAdById(ad.id).then(function(data) {
-			if (data) {
-				userData.service.updateAdForDelete(data);
-				$window.location.href = '#/user/ads/delete/' + ad.id;
-			}
-		}, function(err) {
-			console.log(err);
-		});
-
-
+		console.log(ad);
+		$cookieStore.put('adForDelete',ad.id);
+		$window.location.href = '#/user/ads/delete/' + ad.id;
 	};
 	$scope.loadEditAdPage = function(ad) {
-		userData.getAdById(ad.id).then(function(data) {
-			if (data) {
-				$window.location.href = '#/user/ads/edit/' + ad.id;
-				userData.service.updateAdForEdit(data);
-			}
-		}, function(err) {
-			console.log(err);
-		});
+		$cookieStore.put('adForEdit',ad.id);
+		$window.location.href = '#/user/ads/edit/' + ad.id;
 	};
 
-	function checkIfUserIsLogged() {
-		if (Auth.isLoggedUser()) {
-			$scope.getAds($scope.adsRequestParams);
-		}
-	}
-
-
-
-	checkIfUserIsLogged();
+$scope.getAds($scope.adsRequestParams);
 });

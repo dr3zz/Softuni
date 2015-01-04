@@ -1,19 +1,24 @@
-softUniApp.controller('EditAdController', function($scope, userData, $q, messaging,$window) {
-	$scope.adForEdit = {};
-	$scope.$on('valueUpdated', function() {
-		$scope.adForEdit = userData.service.adForEdit;
-		$scope.imageDataUrl = $scope.adForEdit.imageDataUrl;
-		
-	});
-	$scope.adForEdit = userData.service.adForEdit;
-	$scope.imageDataUrl = $scope.adForEdit.imageDataUrl;
-	// $scope.imageDataUrl = userData.service.adForEdit.imageDataUrl;
+softUniApp.controller('EditAdController', function($scope, $cookieStore, userData, $q, messaging, $window) {
+	if (!$cookieStore.get('adForEdit')) {
+		$window.location.href = '#/user/ads';
+	} else {
+		adForEdit();
+	}
+
+	function adForEdit() {
+		var id = $cookieStore.get('adForEdit');
+		userData.getAdById(id).then(function(data) {
+			$scope.adForEdit = data;
+			$scope.imageDataUrl = $scope.adForEdit.imageDataUrl;
+		}, function(err) {
+			console.log(err);
+		});
+
+	}
+
 	$scope.changeImage = function(img) {
 		$scope.adForEdit.imageDataUrl = img;
 		$scope.adForEdit.changeimage = true;
-		userData.service.updateAdForEdit($scope.adForEdit);
-	
-		
 	};
 	$scope.fileSelected = function(fileInputField) {
 		var name = fileInputField.files[0].name;
@@ -28,46 +33,43 @@ softUniApp.controller('EditAdController', function($scope, userData, $q, messagi
 		readFile(file).then(function(values) {
 			$scope.imageDataUrl = values;
 			$('#filename').text(name);
-	
+
 		}, function(err) {
 			messaging.errorMessage(err.target.error.message);
 
 		});
 	};
-	$scope.deleteImage = function () {
+	$scope.deleteImage = function() {
 		$scope.adForEdit.imageDataUrl = undefined;
 		$scope.imageDataUrl = undefined;
 		$scope.adForEdit.changeimage = true;
-		userData.service.updateAdForEdit($scope.adForEdit);
-	
 	};
-	$scope.editAdFunction = function () {
-		userData.editUserAd($scope.adForEdit).then(function (data) {
-			$scope.adForEdit = {};
-			userData.service.updateAdForEdit($scope.adForEdit);
+	$scope.editAdFunction = function() {
+		userData.editUserAd($scope.adForEdit).then(function(data) {
 			$window.location.href = "/#user/ads";
 			messaging.successMessage(data.message);
-		
-		},function (err) {
-			if(err.modelState) {
+
+		}, function(err) {
+			if (err.modelState) {
 				var error = err.modelState;
-				if(error['model.Text']) {
+				if (error['model.Text']) {
 					messaging.errorMessage(error['model.Text'][0]);
 				}
-				if(error['model.Title']) {
+				if (error['model.Title']) {
 					messaging.errorMessage(error['model.Title'][0]);
 				}
-				if(error['model.townId']) {
+				if (error['model.townId']) {
 					// messaging.errorMessage(error['model.townId'][0]);
 				}
-				if(error['model.categoryId']) {
+				if (error['model.categoryId']) {
 					// messaging.errorMessage(error['model.categoryId'][0]);
 				}
 			}
 			console.log(err);
-			
+
 		});
 	};
+
 	function readFile(file) {
 		var deferred = $q.defer();
 
@@ -82,14 +84,7 @@ softUniApp.controller('EditAdController', function($scope, userData, $q, messagi
 
 		return deferred.promise;
 	}
-	$scope.removeEditAd = function () {
-		$scope.adForEdit = {};
-		userData.service.updateAdForEdit($scope.adForEdit);
-		$window.location.href = '#/user/ads';
+	
 
-	};
-	// if(!$scope.adForEdit.id) {
-	// 	$window.location.href = '#/user/ads';
-	// }
 
 });

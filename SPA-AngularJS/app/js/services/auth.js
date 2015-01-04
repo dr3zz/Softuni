@@ -1,7 +1,7 @@
 "use strict";
 
-softUniApp.factory('Auth', function($http, $q, $window) {
-    var baseUrl = 'http://localhost:1337/api/user/';
+softUniApp.factory('Auth', function($http, $q, $window,baseUrl) {
+    var baseUserUrl = baseUrl + 'user/';
     var headers = {};
 
     function setAuthorizationHeaders(accessToken) {
@@ -59,7 +59,7 @@ softUniApp.factory('Auth', function($http, $q, $window) {
             var d = $q.defer();
             $http({
                     method: 'POST',
-                    url: baseUrl + 'register/',
+                    url: baseUserUrl + 'register/',
                     data: user
                 })
                 .success(function(userRegisterData) {
@@ -75,7 +75,7 @@ softUniApp.factory('Auth', function($http, $q, $window) {
             var d = $q.defer();
             $http({
                     method: 'POST',
-                    url: baseUrl + 'login/',
+                    url: baseUserUrl + 'login/',
                     data: user
                 })
                 .success(function(userLoginData) {
@@ -91,7 +91,7 @@ softUniApp.factory('Auth', function($http, $q, $window) {
             var d = $q.defer();
             $http({
                     method: 'POST',
-                    url: baseUrl + 'logout/',
+                    url: baseUserUrl + 'logout/',
                     headers: headers,
                     data: {}
                 })

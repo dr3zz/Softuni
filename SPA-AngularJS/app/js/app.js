@@ -1,5 +1,5 @@
-var softUniApp = angular.module('softUniApp', ['ngResource', 'ngRoute'])
-	.config(function($routeProvider, $locationProvider) {
+var softUniApp = angular.module('softUniApp', ['ngRoute','ngCookies'])
+	.config(function($routeProvider) {
 
 		$routeProvider.when('/register', {
 			title: 'Ads - Registration',
@@ -91,16 +91,23 @@ var softUniApp = angular.module('softUniApp', ['ngResource', 'ngRoute'])
 		});
 		// $locationProvider.html5Mode(true);
 
-	}).run(function($location, $rootScope, Auth,userData) {
+	}).run(function($location, $rootScope, $cookieStore, Auth,userData) {
 		$rootScope.page = {
 			setTitle: function(title) {
 				this.title = title;
 			}
 		};
 		$rootScope.$on('$routeChangeSuccess', function(event, current, previous) {
-
+			var editAdUrl = 'templates/user/user-edit-ad.html';
+			var deleteAdUrl = 'templates/user/user-delete-ad.html';
+			// console.log($cookieStore);
 			$rootScope.page.setTitle(current.$$route.title || 'Default Title');
-			
+			if($cookieStore.get('adForEdit') && current.$$route.templateUrl != editAdUrl) {
+				$cookieStore.remove('adForEdit');
+			}
+			if($cookieStore.get('adForDelete') && current.$$route.templateUrl != deleteAdUrl) {
+				$cookieStore.remove('adForDelete');
+			}
 
 		});
 		$rootScope.$on('$routeChangeStart', function(event, next) {
@@ -116,4 +123,6 @@ var softUniApp = angular.module('softUniApp', ['ngResource', 'ngRoute'])
 		});
 	})
 	.constant('baseUrl', 'http://localhost:1337/api/')
+	// .constant('baseUrl', 'http://softuni-ads.azurewebsites.net/api/')
 	.constant('pageSize', 4);
+	

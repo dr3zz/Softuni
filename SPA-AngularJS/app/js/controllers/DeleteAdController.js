@@ -1,27 +1,26 @@
-softUniApp.controller('DeleteAdController', function($scope, $window, userData, messaging) {
-	$scope.adForDelete = {};
-	$scope.$on('valueUpdated', function() {
-		$scope.adForDelete = userData.service.adForDelete;
-		
-	});
-	$scope.adForDelete = userData.service.adForDelete;
+softUniApp.controller('DeleteAdController', function($scope, $cookieStore, $window, userData, messaging) {
+	if (!$cookieStore.get('adForDelete')) {
+		$window.location.href = '#/user/ads';
+	} else {
+		// console.log($cookieStore.get('adForDelete'));
+		adForDelete();
+	}
+
+	function adForDelete() {
+		var id = $cookieStore.get('adForDelete');
+		userData.getAdById(id).then(function(data) {
+			$scope.adForDelete = data;
+		}, function(err) {
+			console.log(err);
+		});
+	}
 	$scope.deleteAd = function() {
-		userData.deleteUserAd($scope.adForDelete.id).then(function(data) {
+		var id = $cookieStore.get('adForDelete');
+		userData.deleteUserAd(id).then(function(data) {
 			$window.location.href = '#/user/ads';
-			$scope.adForDelete = {};
-			userData.service.updateAdForDelete($scope.adForDelete);
 			messaging.successMessage(data.message);
 		}, function(err) {
-			console.log("this is error" + err);
 			messaging.errorMessage(err);
 		});
 	};
-	$scope.removeDeleteAd = function() {
-		$scope.adForDelete = {};
-		userData.service.updateAdForDelete($scope.adForDelete);
-		$window.location.href = '#/user/ads';
-	};
-	// if (!$scope.adForDelete.id) {
-	// 	$window.location.href = '#/user/ads';
-	// }
 });

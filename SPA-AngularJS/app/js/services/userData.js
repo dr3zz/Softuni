@@ -1,22 +1,22 @@
 softUniApp.factory('userData', function($http, $q, baseUrl, Auth, $rootScope) {
 	var userBaseUrl = baseUrl + "user/";
 	var service = {};
-	service.adForDelete = {};
-	service.adForEdit = {};
+	// service.adForDelete = {};
+	// service.adForEdit = {};
 	service.userPassword = {};
 
-	service.updateAdForDelete = function(value) {
-		this.adForDelete = value;
-		$rootScope.$broadcast('valueUpdated');
-	};
+	// service.updateAdForDelete = function(value) {
+	// 	this.adForDelete = value;
+	// 	$rootScope.$broadcast('valueUpdated');
+	// };
 	service.updateUserPassword = function(value) {
 		this.userPassword = value;
 		$rootScope.$broadcast('valueUpdated');
 	};
-	service.updateAdForEdit = function(value) {
-		this.adForEdit = value;
-		$rootScope.$broadcast('valueUpdated');
-	};
+	// service.updateAdForEdit = function(value) {
+	// 	this.adForEdit = value;
+	// 	$rootScope.$broadcast('valueUpdated');
+	// };
 	var headers = Auth.getAuthorizationHeaders();
 
 	function publishUserAdAgain(data) {
@@ -130,7 +130,7 @@ softUniApp.factory('userData', function($http, $q, baseUrl, Auth, $rootScope) {
 		var d = $q.defer();
 		$http({
 				method: 'GET',
-				url: userBaseUrl + 'ads/',
+				url: userBaseUrl + 'ads',
 				params: params,
 				headers: headers,
 			})
