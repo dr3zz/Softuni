@@ -65,7 +65,7 @@ var softUniApp = angular.module('softUniApp', ['ngRoute','ngCookies'])
 
 		});
 		$routeProvider.when('/user/ads/edit/:id', {
-			title: 'edit ad',
+			title: 'Ads - Edit Ad',
 			templateUrl: 'templates/user/user-edit-ad.html',
 			data: {
 				requireLogin: true
@@ -101,7 +101,10 @@ var softUniApp = angular.module('softUniApp', ['ngRoute','ngCookies'])
 			var editAdUrl = 'templates/user/user-edit-ad.html';
 			var deleteAdUrl = 'templates/user/user-delete-ad.html';
 			// console.log($cookieStore);
-			$rootScope.page.setTitle(current.$$route.title || 'Default Title');
+			if(current.$$route){
+				$rootScope.page.setTitle(current.$$route.title || 'Default Title');
+			}
+			
 			if($cookieStore.get('adForEdit') && current.$$route.templateUrl != editAdUrl) {
 				$cookieStore.remove('adForEdit');
 			}

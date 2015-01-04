@@ -36,7 +36,6 @@ softUniApp.controller('UserController', function($scope,$cookieStore, $window, m
 			});
 	};
 	$scope.loadDeleteAdPage = function(ad) {
-		console.log(ad);
 		$cookieStore.put('adForDelete',ad.id);
 		$window.location.href = '#/user/ads/delete/' + ad.id;
 	};
