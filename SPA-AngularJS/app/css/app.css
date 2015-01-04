@@ -27,3 +27,23 @@
 .top-buffer { 
 	margin-top:5% ;
 }
+.footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 40px;
+  background-color:#f5f5f5;
+}
+.container .credit {
+	color: #999999;
+    margin: 1% 0;
+}
+.container .credit a {
+	color: #0088cc;
+    /*margin: 1% 0;*/
+}
+.container .credit a:hover {
+	color: #005580;
+    /*margin: 1% 0;*/
+}
