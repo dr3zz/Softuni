@@ -95,7 +95,7 @@
              
             </div>
         </div>
-        <div class='col-lg-4'>
+        <div class='col-lg-4'data-ng-controller="TownsController">
           <label for="inputEmail" class="control-label">Town:</label>
           <select  class='form-control' name="townId"  ng-model="registerObj.townId">
            <option value='{{town.id}}'data-ng-repeat="town in towns">{{town.name}}</option>
