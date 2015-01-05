@@ -19,6 +19,7 @@ softUniApp.controller('EditAdController', function($scope, $cookieStore, userDat
 	$scope.changeImage = function(img) {
 		$scope.adForEdit.imageDataUrl = img;
 		$scope.adForEdit.changeimage = true;
+		messaging.successMessage("Image is loaded, press the edit button to continue");
 	};
 	$scope.fileSelected = function(fileInputField) {
 		var name = fileInputField.files[0].name;
@@ -33,6 +34,7 @@ softUniApp.controller('EditAdController', function($scope, $cookieStore, userDat
 		readFile(file).then(function(values) {
 			$scope.imageDataUrl = values;
 			$('#filename').text(name);
+
 
 		}, function(err) {
 			messaging.errorMessage(err.target.error.message);

@@ -5,7 +5,7 @@ softUniApp.controller('EditUserProfileController', function($scope, $window, mes
 	$scope.getUserProfile = function() {
 		userData.getUserProfile().then(function(data) {
 			$scope.userProfile = data;
-
+			userData.service.updateUserPassword({});
 		}, function(err) {
 			console.log(err);
 		});
@@ -16,17 +16,20 @@ softUniApp.controller('EditUserProfileController', function($scope, $window, mes
 				userData.service.updateUserPassword({});
 				updateProfile(user);
 			}, function(err) {
-				if(err.modelState) {
+				if (err.modelState) {
 					var error = err.modelState;
-			
-					if(error['model.ConfirmPassword']) {
+
+					if (error['model.ConfirmPassword']) {
 						messaging.errorMessage(error['model.ConfirmPassword'][0]);
 					}
-					if(error['']) {
+					if (error['']) {
 						messaging.errorMessage(error[''][0]);
 					}
+				} else {
+					messaging.errorMessage(err.message);
 				}
-				
+
+
 			});
 		} else {
 			updateProfile(user);
@@ -49,7 +52,7 @@ softUniApp.controller('EditUserProfileController', function($scope, $window, mes
 	});
 	$scope.userPassword = userData.service.userPassword;
 	$scope.changeUserPassword = function(password) {
-		if(password.newPassword != password.confirmPassword) {
+		if (password.newPassword != password.confirmPassword) {
 			messaging.errorMessage("The new password and confirmation password do not match.");
 			return;
 		}
@@ -57,7 +60,7 @@ softUniApp.controller('EditUserProfileController', function($scope, $window, mes
 		userData.service.updateUserPassword($scope.userPassword);
 		messaging.successMessage("Assigned a new password click Update button to continue");
 	};
-	$scope.DeletePasswordUpdate = function () {
+	$scope.DeletePasswordUpdate = function() {
 		$scope.userPassword = {};
 		userData.service.updateUserPassword($scope.userPassword);
 	};

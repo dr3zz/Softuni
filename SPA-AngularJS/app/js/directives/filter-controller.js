@@ -6,6 +6,7 @@ softUniApp.directive('filtercontroller', [function() {
 			$scope.adStatus = 'all';
 			$scope.activeTown = 'all';
 			$scope.activeCategory = 'all';
+			
 			function clearFilter () {
 				if($scope.adsRequestParams.status) {
 					$scope.adsRequestParams.status = null;
@@ -18,11 +19,11 @@ softUniApp.directive('filtercontroller', [function() {
 				} else {
 					$scope.activeTown = 'all';
 				}
-				$scope.adsRequestParams.startPage = 1;
+				// $scope.adsRequestParams.startPage = 1;
 				$scope.adsRequestParams.townId = town;
 				clearFilter();
-				// $scope.getAds($scope.adsRequestParams);
-				this.firstPage();
+				$scope.getAds($scope.adsRequestParams);
+				// this.firstPage();
 			};
 			this.addCategory = function(category) {
 				if (category) {
@@ -30,11 +31,11 @@ softUniApp.directive('filtercontroller', [function() {
 				} else {
 					$scope.activeCategory = 'all';
 				}
-				$scope.adsRequestParams.startPage = 1;
+				// $scope.adsRequestParams.startPage = 1;
 				$scope.adsRequestParams.categoryId = category;
 				clearFilter();
-				// $scope.getAds($scope.adsRequestParams);
-				this.firstPage();
+				$scope.getAds($scope.adsRequestParams);
+				// this.firstPage();
 			};
 			this.addUserAdsStatus = function(status) {
 				if (status) {
@@ -44,8 +45,8 @@ softUniApp.directive('filtercontroller', [function() {
 				}
 				$scope.adsRequestParams.status = status;
 		
-				this.setStartPage(1)
-				// $scope.getAds($scope.adsRequestParams);
+				// this.setStartPage(1)
+				$scope.getAds($scope.adsRequestParams);
 				// this.firstPage();
 
 			};

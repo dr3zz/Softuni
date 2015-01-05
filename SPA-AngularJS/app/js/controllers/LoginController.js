@@ -48,7 +48,6 @@ softUniApp.controller('LoginController', function($scope, $http, $window, Auth, 
         Auth.login(user)
             .then(
                 function(userLoginData) {
-                    // console.dir(userLoginData);
                     Auth.setLoggedUser(userLoginData);
                     Auth.getAuthorizationHeaders();
                     $window.location.href = '#/user/home';
@@ -63,9 +62,9 @@ softUniApp.controller('LoginController', function($scope, $http, $window, Auth, 
     function logout() {
         var headers = Auth.getAuthorizationHeaders();
         Auth.logout(headers).then(function(data) {
-            Auth.removeAuthorizationHeaders();
-            Auth.setLoggedUser(undefined);
+            Auth.removeLoggedUser();
             messaging.successMessage(data.message);
+            
             $window.location.href = '#/';
         }, function(err) {
             messaging.errorMessage(err.message);
