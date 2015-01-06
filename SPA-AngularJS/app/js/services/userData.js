@@ -1,4 +1,4 @@
-softUniApp.factory('userData', function($http, $q, baseUrl, Auth, $rootScope) {
+softUniApp.factory('userData', function($http, $q, baseUrl, authorization, $rootScope) {
 	var userBaseUrl = baseUrl + "user/";
 	var service = {};
 	service.userPassword = {};
@@ -7,7 +7,7 @@ softUniApp.factory('userData', function($http, $q, baseUrl, Auth, $rootScope) {
 		this.userPassword = value;
 		$rootScope.$broadcast('valueUpdated');
 	};
-	var headers = Auth.getAuthorizationHeaders();
+	var headers = authorization.getAuthorizationHeaders();
 
 	function publishUserAdAgain(data) {
 		var d = $q.defer();

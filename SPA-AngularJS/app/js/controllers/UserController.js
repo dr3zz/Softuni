@@ -1,4 +1,4 @@
-softUniApp.controller('UserController', function($scope,$cookieStore, $window, messaging, Auth, userData, pageSize) {
+softUniApp.controller('UserController', function($scope,$cookieStore, $window, messaging, userData, pageSize) {
 
 	$scope.getAds = function(requestParams) {
 		userData.getAllUserAds(requestParams).then(function(data) {

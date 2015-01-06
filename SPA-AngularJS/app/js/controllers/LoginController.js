@@ -1,7 +1,7 @@
-softUniApp.controller('LoginController', function($scope, $http, $window, Auth, mainData, messaging) {
+softUniApp.controller('LoginController', function($scope, $http, $window, authentication,authorization, mainData, messaging) {
     $scope.register = registerUser;
     $scope.login = loginUser;
-    $scope.userData = Auth;
+    $scope.userData = authorization;
     $scope.logout = logout;
 
     $scope.emailPattern = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -10,11 +10,11 @@ softUniApp.controller('LoginController', function($scope, $http, $window, Auth, 
 
 
     function registerUser() {
-        Auth.register($scope.registerObj)
+        authentication.register($scope.registerObj)
             .then(
                 function(userRegisterData) {
-                    Auth.setLoggedUser(userRegisterData);
-                    Auth.getAuthorizationHeaders();
+                    authorization.setLoggedUser(userRegisterData);
+                    authorization.getAuthorizationHeaders();
 
                     $window.location.href = '#/user/home';
                     messaging.successMessage("Welcome " + userRegisterData.username);
@@ -45,11 +45,11 @@ softUniApp.controller('LoginController', function($scope, $http, $window, Auth, 
             password: $scope.password
         };
 
-        Auth.login(user)
+        authentication.login(user)
             .then(
                 function(userLoginData) {
-                    Auth.setLoggedUser(userLoginData);
-                    Auth.getAuthorizationHeaders();
+                    authorization.setLoggedUser(userLoginData);
+                    authorization.getAuthorizationHeaders();
                     $window.location.href = '#/user/home';
                     messaging.successMessage("Welcome " + userLoginData.username);
                 },
@@ -60,9 +60,9 @@ softUniApp.controller('LoginController', function($scope, $http, $window, Auth, 
     }
 
     function logout() {
-        var headers = Auth.getAuthorizationHeaders();
-        Auth.logout(headers).then(function(data) {
-            Auth.removeLoggedUser();
+        var headers = authorization.getAuthorizationHeaders();
+        authentication.logout(headers).then(function(data) {
+            authorization.removeLoggedUser();
             messaging.successMessage(data.message);
             
             $window.location.href = '#/';

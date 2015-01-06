@@ -1,51 +1,51 @@
 <!DOCTYPE html>
 <html ng-app="softUniApp">
 <head>
-	<!-- <title>SoftUni app</title> -->
-	<link rel="stylesheet" href="css/app.css">
-	<link rel="stylesheet" href="css/bootstrap.css">
- 	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-  <link rel="icon" type='image/jpg'  href="imgs/softuni.jpg">
-	<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-	<script type="text/javascript" src='lib/jquery.noty.packaged.min.js'></script>
- 
-  <title>{{page.title}}</title>
+    <!-- <title>SoftUni app</title> -->
+    <link rel="stylesheet" href="css/app.css">
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="icon" type='image/jpg' href="imgs/softuni.jpg">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script type="text/javascript" src='lib/jquery.noty.packaged.min.js'></script>
+
+    <title>{{page.title}}</title>
 </head>
 
-<body >
-  <div id='wrapper'>
+<body>
+<div id='wrapper'>
     <div class="navbar navbar-default">
-    <div class="navbar-header">
-      <div class='container'>
-        <div class='row'></div>
-        <div class='col-lg-4'>
-      <a class="navbar-brand" href="#/">Home</a>
-        </div>
-        <div class='col-lg-5'>
-             <h1 class="navbar navbar-text centered">{{page.title}}</h1>
-        </div>
-        <div class='col-lg-3'>
-          <div data-ng-controller="LoginController" >
-            <div class='navbar navbar-text navbar-right ' data-ng-if="userData.isLoggedUser()" >
-              <div class='navbar-text'>{{userData.getLoggedUser().username}}</div>
-              <a href="" data-ng-click="logout()" class='navbar-brand'>Logout</a>
+        <div class="navbar-header">
+            <div class='container'>
+                <div class='row'></div>
+                <div class='col-lg-4'>
+                    <a class="navbar-brand" href="#/">Home</a>
+                </div>
+                <div class='col-lg-5'>
+                    <h1 class="navbar navbar-text centered">{{page.title}}</h1>
+                </div>
+                <div class='col-lg-3'>
+                    <div data-ng-controller="LoginController">
+                        <div class='navbar navbar-text navbar-right ' data-ng-if="userData.isLoggedUser()">
+                            <div class='navbar-text'>{{userData.getLoggedUser().username}}</div>
+                            <a href="" data-ng-click="logout()" class='navbar-brand'>Logout</a>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
+    </div>
+    <div id="notes"></div>
+    <div data-ng-view class='container'>
     </div>
 </div>
-<div id="notes"></div>
-<div data-ng-view class='container'>
-</div>
-  </div>
-  
+
 
 <div class="footer centered ">
-      <div class="container">
+    <div class="container">
         <p class="credit">2014 AngularJS Practical Project - <a href="http://softuni.bg">Software University </a></p>
-      </div>
     </div>
+</div>
 <script src="lib/angular/angular.js"></script>
 <script src="lib/angular/angular-route.js"></script>
 <script src="lib/angular/angular-resource.js"></script>
@@ -61,7 +61,8 @@
 <script type="text/javascript" src='js/controllers/PublishAdController.js'></script>
 <script type="text/javascript" src='js/controllers/EditUserProfileController.js'></script>
 <script type="text/javascript" src='js/services/mainPage.js'></script>
-<script type="text/javascript" src='js/services/auth.js'></script>
+<script type="text/javascript" src="js/services/authentication.js"></script>
+<script type="text/javascript" src="js/services/authorization.js"></script>
 <script type="text/javascript" src='js/services/userData.js'></script>
 <script type="text/javascript" src='js/services/messaging.js'></script>
 <script type="text/javascript" src='js/directives/pagination.js'></script>
@@ -73,9 +74,6 @@
 <script type="text/javascript" src='js/directives/isolate-form.js'></script>
 <script type="text/javascript" src='js/filters/image-filter.js'></script>
 <script type="text/javascript" src='js/directives/filereader.js'></script>
-
-
-
 
 
 </body>

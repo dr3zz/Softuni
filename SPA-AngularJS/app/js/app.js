@@ -1,6 +1,6 @@
-var softUniApp = angular.module('softUniApp', ['ngRoute','ngCookies'])
+var softUniApp = angular.module('softUniApp', ['ngRoute', 'ngCookies'])
 	.config(function($routeProvider) {
-
+		
 		$routeProvider.when('/register', {
 			title: 'Ads - Registration',
 			templateUrl: 'templates/register.html',
@@ -81,7 +81,14 @@ var softUniApp = angular.module('softUniApp', ['ngRoute','ngCookies'])
 			},
 			controller: 'DeleteAdController'
 
-
+		});
+		$routeProvider.when('/admin/home', {
+			title: "admin home",
+			templateUrl: 'templates/all-ads.html',
+			data: {
+				requireLogin: true
+			},
+			controller: 'MainController'
 
 		});
 
@@ -91,7 +98,7 @@ var softUniApp = angular.module('softUniApp', ['ngRoute','ngCookies'])
 		});
 		// $locationProvider.html5Mode(true);
 
-	}).run(function($location, $rootScope, $cookieStore, Auth,userData) {
+	}).run(function($location, $rootScope, $cookieStore, authentication,authorization, userData) {
 		$rootScope.page = {
 			setTitle: function(title) {
 				this.title = title;
@@ -101,25 +108,24 @@ var softUniApp = angular.module('softUniApp', ['ngRoute','ngCookies'])
 			var editAdUrl = 'templates/user/user-edit-ad.html';
 			var deleteAdUrl = 'templates/user/user-delete-ad.html';
 			// console.log($cookieStore);
-			if(current.$$route){
+			if (current.$$route) {
 				$rootScope.page.setTitle(current.$$route.title || 'Default Title');
 			}
-			
-			if($cookieStore.get('adForEdit') && current.$$route.templateUrl != editAdUrl) {
+
+			if ($cookieStore.get('adForEdit') && current.$$route.templateUrl != editAdUrl) {
 				$cookieStore.remove('adForEdit');
 			}
-			if($cookieStore.get('adForDelete') && current.$$route.templateUrl != deleteAdUrl) {
+			if ($cookieStore.get('adForDelete') && current.$$route.templateUrl != deleteAdUrl) {
 				$cookieStore.remove('adForDelete');
 			}
 
 		});
 		$rootScope.$on('$routeChangeStart', function(event, next) {
 			if (next.data) {
-				if (!Auth.isLoggedUser() && next.data.requireLogin) {
+				if (!authorization.isLoggedUser() && next.data.requireLogin) {
 					$location.path('/');
 
-				} else if (Auth.isLoggedUser() && !next.data.requireLogin) {
-					
+				} else if (authorization.isLoggedUser() && !next.data.requireLogin) {
 					$location.path('/user/home');
 				}
 			}
@@ -128,4 +134,3 @@ var softUniApp = angular.module('softUniApp', ['ngRoute','ngCookies'])
 	.constant('baseUrl', 'http://localhost:1337/api/')
 	// .constant('baseUrl', 'http://softuni-ads.azurewebsites.net/api/')
 	.constant('pageSize', 4);
-	
