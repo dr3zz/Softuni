@@ -1,5 +1,5 @@
 softUniApp.controller('UserController', function($scope,$cookieStore, $window, messaging, userData, pageSize) {
-
+	$scope.ready = false;
 	$scope.getAds = function(requestParams) {
 		userData.getAllUserAds(requestParams).then(function(data) {
 				$scope.userAds = data.ads;
