@@ -1,4 +1,4 @@
-softUniApp.directive('filterads', [function() {
+softUniApp.directive('filterAdStatus', [function() {
     return {
         restrict: 'A',
         templateUrl: 'templates/user/includes/user-filterads.html',
