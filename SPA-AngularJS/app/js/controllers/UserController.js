@@ -5,6 +5,7 @@ softUniApp.controller('UserController', function($scope,$cookieStore, $window, m
 				$scope.userAds = data.ads;
 				$scope.pagesArr = new Array(data.numPages);
 				$scope.numPages = data.numPages;
+				$scope.ready = true;
 			},
 			function(err) {
 				console.log(err);

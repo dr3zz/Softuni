@@ -7,7 +7,7 @@ var softUniApp = angular.module('softUniApp', ['ngRoute', 'ngCookies'])
 			data: {
 				requireLogin: false
 			},
-			controller: 'LoginController'
+			controller: 'RegisterController'
 
 
 		});

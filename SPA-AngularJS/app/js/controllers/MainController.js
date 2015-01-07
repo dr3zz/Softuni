@@ -7,6 +7,7 @@ softUniApp.controller('MainController', function($scope, $filter, $rootScope, ma
 				$scope.dataAds = data.ads;
 				$scope.pagesArr = new Array(data.numPages);
 				$scope.numPages = data.numPages;
+				$scope.ready = true;
 			},
 			function(err) {
 				console.log(err);

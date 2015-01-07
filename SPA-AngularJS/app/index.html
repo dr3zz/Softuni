@@ -25,7 +25,7 @@
                     <h1 class="navbar navbar-text centered">{{page.title}}</h1>
                 </div>
                 <div class='col-lg-3'>
-                    <div data-ng-controller="LoginController">
+                    <div data-ng-controller="LogoutController">
                         <div class='navbar navbar-text navbar-right ' data-ng-if="userData.isLoggedUser()">
                             <div class='navbar-text'>{{userData.getLoggedUser().username}}</div>
                             <a href="" data-ng-click="logout()" class='navbar-brand'>Logout</a>
@@ -53,6 +53,8 @@
 <script src="js/app.js"></script>
 <script type="text/javascript" src='js/controllers/MainController.js'></script>
 <script type="text/javascript" src='js/controllers/LoginController.js'></script>
+<script type="text/javascript" src='js/controllers/RegisterController.js'></script>
+<script type="text/javascript" src='js/controllers/LogoutController.js'></script>
 <script type="text/javascript" src='js/controllers/UserController.js'></script>
 <script type="text/javascript" src='js/controllers/TownsController.js'></script>
 <script type="text/javascript" src='js/controllers/CategoriesController.js'></script>
