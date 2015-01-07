@@ -1,30 +1,35 @@
 <div class="well bs-component">
-              <form class="form-horizontal" id="login-form"  >
-                <fieldset>
-                  <legend>Legend</legend>
-                  <div class="form-group">
-                    <label for="username" class="col-lg-2 control-label">Username</label>
-                    <div class="col-lg-10">
-                      <input type="text" id="username" data-ng-model="username" class="form-control input-sm" placeholder="Username">
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label for="password" class="col-lg-2 control-label">Password</label>
-                    <div class="col-lg-10">
-                      <input type="password" id="password" data-ng-model="password" class="form-control input-sm" placeholder="Password">
-                    </div>
-                  </div>
-                 
-                
-                  <div class="form-group">
-                    <div class="col-lg-10 col-lg-offset-2">
-                      
-                      <a type="submit" href="" class="btn btn-primary" data-ng-click="login()">Login</a>
-                      <a href="#/register" class="btn btn-default">Register here</a>
-                    </div>
-                  </div>
-                </fieldset>
-              </form>
-         
+  <form class="form-horizontal" id="login-form" name='loginform' >
+    <fieldset>
+      <legend>Legend</legend>
+      <div class="form-group">
+        <label for="username" class="col-lg-2 control-label">Username</label>
+        <div class="col-lg-10">
+          <input type="text" id="username" data-ng-model="username" class="form-control input-sm" placeholder="Username" data-ng-required="true">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="password" class="col-lg-2 control-label">Password</label>
+        <div class="col-lg-10">
+          <input type="password" id="password" data-ng-model="password" class="form-control input-sm" name='password' placeholder="Password" data-ng-required="true" ng-minlength="2"  >
+           <div class="errors" ng-class="{ active: loginform.password.$invalid && loginform.password.$dirty }">
+              <div class="error ng-hide" ng-show="loginform.password.$error.minlength">
+                <p>Password is longer than 2 characters.</p>
+              </div>
+            </div>
+        </div>
+      </div>
 
-       
+
+      <div class="form-group">
+        <div class="col-lg-10 col-lg-offset-2">
+
+          <a type="submit" href="" class="btn btn-primary" data-ng-click="login()" data-ng-class="{ 'btn-primary': loginform.$valid || loginform.$dirty, 'btn-success': redirect }"
+          ng-disabled="loginform.$invalid || loginform.$pristine || xhr || redirect">Login</a>
+          <a href="#/register" class="btn btn-default">Register here</a>
+        </div>
+      </div>
+    </fieldset>
+  </form>
+
+
