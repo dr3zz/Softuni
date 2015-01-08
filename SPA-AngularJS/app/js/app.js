@@ -1,4 +1,4 @@
-var softUniApp = angular.module('softUniApp', ['ngRoute', 'ngCookies'])
+var softUniApp = angular.module('softUniApp', ['ngRoute', 'ngCookies','ui.bootstrap.pagination'])
 	.config(function($routeProvider) {
 		
 		$routeProvider.when('/register', {
@@ -131,6 +131,6 @@ var softUniApp = angular.module('softUniApp', ['ngRoute', 'ngCookies'])
 			}
 		});
 	})
-	.constant('baseUrl', 'http://localhost:1337/api/')
-	// .constant('baseUrl', 'http://softuni-ads.azurewebsites.net/api/')
+	// .constant('baseUrl', 'http://localhost:1337/api/')
+	.constant('baseUrl', 'http://softuni-ads.azurewebsites.net/api/')
 	.constant('pageSize', 4);

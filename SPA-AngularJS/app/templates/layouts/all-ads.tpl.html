@@ -57,7 +57,7 @@
 
 </div>
 
-<div class='center-block'>
-	<div ng-if='numPages > 1' filtercontroller pagination>
-	</div>
-</div>
+<pagination total-items="numItems" ng-model="adsRequestParams.startPage"
+  items-per-page="adsRequestParams.pageSize" ng-change="reloadAds()"
+  max-size="9" boundary-links="true">
+</pagination>

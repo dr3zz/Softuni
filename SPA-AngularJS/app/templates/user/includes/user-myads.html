@@ -67,6 +67,12 @@
 		</div>
 	</div>
 </div>
-<div class='center-block'>
-	<div ng-if='numPages > 1' filtercontroller pagination></div>
+<div data-ng-if="numItems > 1">
+<pagination total-items="numItems" ng-model="adsRequestParams.startPage"
+  items-per-page="adsRequestParams.pageSize" ng-change="reloadAds()"
+  max-size="9" boundary-links="true">
+</pagination>
+</div>
+<div data-ng-if="numItems == 0" class='well centered'>
+	 No ads found.
 </div>

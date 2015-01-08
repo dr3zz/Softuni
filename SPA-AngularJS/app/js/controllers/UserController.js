@@ -3,8 +3,9 @@ softUniApp.controller('UserController', function($scope,$cookieStore, $window, m
 	$scope.getAds = function(requestParams) {
 		userData.getAllUserAds(requestParams).then(function(data) {
 				$scope.userAds = data.ads;
-				$scope.pagesArr = new Array(data.numPages);
-				$scope.numPages = data.numPages;
+				// $scope.pagesArr = new Array(data.numPages);
+				// $scope.numPages = data.numPages;
+				 $scope.numItems = data.numItems;
 				$scope.ready = true;
 			},
 			function(err) {
@@ -17,7 +18,9 @@ softUniApp.controller('UserController', function($scope,$cookieStore, $window, m
 		pageSize: 2,
 		status: null
 	};
-
+	$scope.reloadAds = function () {
+		$scope.getAds($scope.adsRequestParams);
+	}
 	$scope.deactivateAdStauts = function(ad) {
 		userData.deactivateUserAd(ad).then(function(data) {
 				$scope.getAds($scope.adsRequestParams);

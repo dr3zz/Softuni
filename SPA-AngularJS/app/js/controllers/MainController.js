@@ -5,8 +5,9 @@ softUniApp.controller('MainController', function($scope, $filter, $rootScope, ma
 		mainData.getAllAds(requestParams).then(function(data) {
 
 				$scope.dataAds = data.ads;
-				$scope.pagesArr = new Array(data.numPages);
-				$scope.numPages = data.numPages;
+				// $scope.pagesArr = new Array(data.numPages);
+				// $scope.numPages = data.numPages;
+				$scope.numItems = data.numItems;
 				$scope.ready = true;
 			},
 			function(err) {
@@ -35,7 +36,9 @@ softUniApp.controller('MainController', function($scope, $filter, $rootScope, ma
 		townId : null,
 		categoryId : null
 	};
-
+	$scope.reloadAds = function () {
+		$scope.getAds($scope.adsRequestParams);
+	}
 
 
 	// $scope.selectedTown = function(id) {

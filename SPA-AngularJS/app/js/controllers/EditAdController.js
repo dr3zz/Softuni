@@ -23,7 +23,7 @@ softUniApp.controller('EditAdController', function($scope, $cookieStore, userDat
 	};
 	$scope.fileSelected = function(fileInputField) {
 		var name = fileInputField.files[0].name;
-		console.log(name);
+		// console.log(name);
 		var file = fileInputField.files[0];
 		var element = fileInputField;
 		var imageType = /image.*/;
