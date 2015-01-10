@@ -68,7 +68,7 @@ required*</span>
               <div class='col-lg-10'>
                 <select  class='form-control' name="categoryId"  ng-model="newAdObj.categoryId">
                   <option value=''>No Category</option>
-                  <option value='{{categoryId.id}}'data-ng-repeat="category in categories">{{category.name}}</option>
+                  <option value='{{category.id}}'data-ng-repeat="category in categories">{{category.name}}</option>
                 </select>
               </div>
             </div>
@@ -76,7 +76,6 @@ required*</span>
           </div>
           <div class='col-lg-4 publish-ad-image-container'>
             <img id="thumbnil"  src="{{doc.image_url | searchResultImg}}" alt=""/>
-            <div>200x200</div>
           </div>
         </div>
         <div class="form-group">
