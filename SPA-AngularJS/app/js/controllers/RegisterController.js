@@ -19,7 +19,7 @@ softUniApp.controller('RegisterController', function($scope, $http, $window, aut
                     for (var e in error) {
                         var errorResultString = checkRegisterUserForErrors(error[e]);
                         messaging.errorMessage(errorResultString);
-                        console.log(errorResultString);
+                        // console.log(errorResultString);
                     }
                 }
             );

@@ -4,7 +4,7 @@ softUniApp.controller('TownsController', function($scope, $filter, $rootScope, m
 			.then(function(resp) {
 				$scope.towns = resp;
 			}, function(err) {
-				console.log(err);
+				// console.log(err);
 			});
 	};
 	

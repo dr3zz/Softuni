@@ -4,7 +4,7 @@ softUniApp.controller('CategoriesController', function($scope, $filter, $rootSco
 			.then(function(resp) {
 				$scope.categories = resp;
 			}, function(err) {
-				console.log(err);
+				// console.log(err);
 			});
 	};
 	

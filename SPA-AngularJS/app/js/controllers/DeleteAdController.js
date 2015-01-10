@@ -11,7 +11,7 @@ softUniApp.controller('DeleteAdController', function($scope, $cookieStore, $wind
 		userData.getAdById(id).then(function(data) {
 			$scope.adForDelete = data;
 		}, function(err) {
-			console.log(err);
+			// console.log(err);
 		});
 	}
 	$scope.deleteAd = function() {

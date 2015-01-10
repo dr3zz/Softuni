@@ -7,7 +7,7 @@ softUniApp.controller('EditUserProfileController', function($scope, $window, mes
 			$scope.userProfile = data;
 			userData.service.updateUserPassword({});
 		}, function(err) {
-			console.log(err);
+			// console.log(err);
 		});
 	};
 	$scope.editUserProfile = function(user) {

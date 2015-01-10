@@ -56,8 +56,10 @@
 	</div>
 
 </div>
-
-<pagination total-items="numItems" ng-model="adsRequestParams.startPage"
+<div data-ng-if="numItems > 4">
+	<pagination total-items="numItems" ng-model="adsRequestParams.startPage"
   items-per-page="adsRequestParams.pageSize" ng-change="reloadAds()"
   max-size="9" boundary-links="true">
 </pagination>
+
+</div>

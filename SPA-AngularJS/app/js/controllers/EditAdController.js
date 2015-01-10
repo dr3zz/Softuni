@@ -11,7 +11,7 @@ softUniApp.controller('EditAdController', function($scope, $cookieStore, userDat
 			$scope.adForEdit = data;
 			$scope.imageDataUrl = $scope.adForEdit.imageDataUrl;
 		}, function(err) {
-			console.log(err);
+			// console.log(err);
 		});
 
 	}
