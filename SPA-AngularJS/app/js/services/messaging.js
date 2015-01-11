@@ -8,7 +8,6 @@ softUniApp.factory('messaging', [function() {
 			layout: 'center',
 			timeout: 5000
 		});
-		// $('#notes').notify().errorMessage('', message);
 	}
 
 	function successMessage(message) {
@@ -19,7 +18,6 @@ softUniApp.factory('messaging', [function() {
 			layout: 'topCenter',
 			timeout: 5000
 		});
-		// $('#notes').notify().successMessage(message);
 	}
 
 	return {

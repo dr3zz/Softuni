@@ -2,7 +2,6 @@ softUniApp.controller('DeleteAdController', function($scope, $cookieStore, $wind
 	if (!$cookieStore.get('adForDelete')) {
 		$window.location.href = '#/user/ads';
 	} else {
-		// console.log($cookieStore.get('adForDelete'));
 		adForDelete();
 	}
 

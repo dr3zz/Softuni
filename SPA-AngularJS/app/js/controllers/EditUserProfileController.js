@@ -1,6 +1,5 @@
 softUniApp.controller('EditUserProfileController', function($scope, $window, messaging, userData) {
 	$scope.emailPattern = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-	// $scope.phonePattern = /\(?[+]([0-9]{3})\)?([ -]?)([0-9]{3})\2([0-9]{6})|([0-9]{2,3})[ ]([0-9]{6,7})/g;
 	$scope.phonePattern = /([+359]*[\d ])$/;
 	$scope.getUserProfile = function() {
 		userData.getUserProfile().then(function(data) {
@@ -44,7 +43,7 @@ softUniApp.controller('EditUserProfileController', function($scope, $window, mes
 		}, function(err) {
 
 			console.log(err);
-			// messaging.errorMessage
+			messaging.errorMessage(err.message);
 		});
 	}
 	$scope.$on('valueUpdated', function() {

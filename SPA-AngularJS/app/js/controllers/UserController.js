@@ -1,11 +1,10 @@
-softUniApp.controller('UserController', function($scope,$cookieStore, $window, messaging, userData, pageSize) {
+softUniApp.controller('UserController', function($scope, $cookieStore, $window, messaging, userData, pageSize) {
 	$scope.ready = false;
+	var userPageSize = 2;
 	$scope.getAds = function(requestParams) {
 		userData.getAllUserAds(requestParams).then(function(data) {
 				$scope.userAds = data.ads;
-				// $scope.pagesArr = new Array(data.numPages);
-				// $scope.numPages = data.numPages;
-				 $scope.numItems = data.numItems;
+				$scope.numItems = data.numItems;
 				$scope.ready = true;
 			},
 			function(err) {
@@ -15,19 +14,20 @@ softUniApp.controller('UserController', function($scope,$cookieStore, $window, m
 	};
 	$scope.adsRequestParams = {
 		startPage: 1,
-		pageSize: 2,
+		pageSize: userPageSize,
 		status: null
 	};
-	$scope.reloadAds = function () {
+	$scope.reloadAds = function() {
 		$scope.getAds($scope.adsRequestParams);
-	}
+	};
 	$scope.deactivateAdStauts = function(ad) {
 		userData.deactivateUserAd(ad).then(function(data) {
 				$scope.getAds($scope.adsRequestParams);
 				messaging.successMessage(data.message);
 			},
 			function(err) {
-				console.log(err);
+				// console.log(err);
+				messaging.errorMessage(err.message);
 			});
 	};
 	$scope.publishAdAgain = function(ad) {
@@ -36,17 +36,18 @@ softUniApp.controller('UserController', function($scope,$cookieStore, $window, m
 				messaging.successMessage(data.message);
 			},
 			function(err) {
-				console.log(err);
+				// console.log(err);
+				messaging.errorMessage(err.message);
 			});
 	};
 	$scope.loadDeleteAdPage = function(ad) {
-		$cookieStore.put('adForDelete',ad.id);
+		$cookieStore.put('adForDelete', ad.id);
 		$window.location.href = '#/user/ads/delete/' + ad.id;
 	};
 	$scope.loadEditAdPage = function(ad) {
-		$cookieStore.put('adForEdit',ad.id);
+		$cookieStore.put('adForEdit', ad.id);
 		$window.location.href = '#/user/ads/edit/' + ad.id;
 	};
 
-$scope.getAds($scope.adsRequestParams);
+	$scope.getAds($scope.adsRequestParams);
 });
